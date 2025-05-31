@@ -1,0 +1,498 @@
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo.jpg">
+    <title>{{title}}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/stephen.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+</head>
+<body>
+   <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <h1>Stephenschool</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li class="scroll-to-section"><a href="#top" class="active">Asosiy</a></li>
+                      <li class="scroll-to-section"><a href="#courses">Kurslar</a></li>
+                      <li class="scroll-to-section"><a href="#contact">Kursga Yozilish</a></li>
+                      <li class="scroll-to-section"><a href="/login">Kirish <i class="fas fa-sign-in"></i></a></li>
+                  </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="main-banner" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-banner">
+            <div class="item item-2">
+              <div class="header-text">
+                <span class="category">Maqsad</span>
+                <h2>A'lo Natijaga Faqatgina Biz Bilan Erishing!</h2>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{#if contactSuccess}}
+    <div class="success">
+    <svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M10 15.172l-3.95-3.95-1.414 1.414L10 18l9-9-1.414-1.414z"></path>
+    </svg>
+    <span class="success__title">{{contactSuccess}}</span>
+    <svg class="success__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+    </svg>
+    </div>
+    <script>
+     const successElement = document.querySelector('.success');   
+    document.querySelector('.success__close').addEventListener('click', function () {
+    const successElement = document.querySelector('.success');
+    successElement.style.display = 'none';});
+    if (successElement) {
+            // 5 soniyadan keyin elementni yashiramiz
+            setTimeout(() => {
+                successElement.style.display = 'none';
+            }, 10000); // 5000ms = 5 sekund
+        }
+    </script>
+{{/if}}
+
+  <div class="services section" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-item">
+            <div class="icon">
+              <img src="/images/service-01.png" alt="online degrees">
+            </div>
+            <div class="main-content">
+              <h4>Qulay Ta'lim</h4>
+              <p> Biz o‘quvchilarga haftaning 5 kuni davomida to‘liq dars mashg‘ulotlari va dam olish kunlari bilimlarini mustahkamlash uchun Mock Exam taklif qilamiz.</p>
+              <div class="main-button"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-item">
+            <div class="icon">
+              <img src="/images/service-02.png" alt="short courses">
+            </div>
+            <div class="main-content">
+              <h4>Yaxshi Sharoitlar</h4>
+              <p>O'quv Markazimiz yorqin, qulay va barcha kerakli jihozlar bilan ta’minlangan o‘quv xonalariga ega va biz ta’limni nafaqat samarali, balki qulay qilishga ham intilamiz!</p>
+              <div class="main-button"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-item">
+            <div class="icon">
+              <img src="/images/service-03.png" alt="web experts">
+            </div>
+            <div class="main-content">
+              <h4>Malakali O'qituvchilar</h4>
+              <p>Bizning o‘qituvchilarimiz xorijiy tillarni o‘rgatishda ko‘p yillik tajribaga ega bo‘lib, til o‘rganishni qulay va samarali qiladi.</p>
+              <div class="main-button"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section courses" id="courses">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h6>Bizning Kurslar</h6>
+            <h2>Mavjud Kurslar</h2>
+          </div>
+        </div>
+      </div>
+      <ul class="event_filter">
+        <li>
+          <a class="is_active" href="#!" data-filter="*">Barchasi</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".Beginner, .Elementry">Beginner, Elementry</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".Pre-Intermediate, .Intermediate">Pre-Intermediate, Intermediate</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".Pre-IELTS, .IELTS">Pre-IELTS, IELTS</a>
+        </li>
+      </ul>
+      <div class="row event_box">
+        {{#if courses.length}}
+        {{#each courses}}
+         <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 {{level}}">
+          <div class="events_item">
+            <div class="thumb">
+              <a href="#contact"><img src="/images/{{level}}.jpeg" alt="Course Image"></a>
+              <span class="price"><h6><em></em>{{coursePrice}}</h6></span>
+            </div>
+            <div class="down-content">
+              <span class="author">{{teacherName}}</span>
+              <h4>{{subject}} Kursi</h4>
+              <h4>Dars Vaqti: {{lessonTime}}</h4>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+        {{else}}
+
+        {{/if}}
+      </div>
+    </div>
+  </section>
+
+  <div class="section fun-facts">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="wrapper">
+            <div class="row">
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="500" data-speed="1000"></h2>
+                   <p class="count-text ">Barcha Studentlar</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="6" data-speed="1000"></h2>
+                  <p class="count-text ">O'qituvchilar Soni</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="10" data-speed="1000"></h2>
+                  <p class="count-text ">IELTS 7+ Olganlar</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter end">
+                  <h2 class="timer count-title count-number" data-to="10" data-speed="1000"></h2>
+                  <p class="count-text ">Tajriba</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="contact-us section" id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6  align-self-center">
+          <div class="section-heading">
+            <h6>Aloqa</h6>
+            <h2>Hoziroq Kursga Yoziling!</h2>
+            <p>Agar sizga sifatli ta'lim va a'lo natija kerak bo'lsa bizga qo'shilishingiz mumkin. Buning uchun quyidagilarni
+              to'ldiring va biz siz bilan tez orada bog'lanamiz!
+            </p>
+            <div class="special-offer">
+              <span class="offer"></span>
+              <h6>Manzil: <em>Qarshi Shahar</em></h6>
+              <h4>Paxtazor Mikrorayon <em>7/112</em></h4>
+              {{!-- <a href="#"><i class="fa fa-angle-right"></i></a> --}}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="contact-us-content">
+            <form id="contact-form" action="/contact" method="post">
+              <div class="row">
+                <div class="col-lg-12">
+                  <fieldset>
+                    <input type="name" name="name" id="name" placeholder="Ism" autocomplete="on" required>
+                  </fieldset>
+                </div>
+                 <div class="col-lg-12">
+                  <fieldset>
+                    <input type="surName" name="surName" id="surName" placeholder="Familya" autocomplete="on" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Telefon Raqamingiz" autocomplete="on"  required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="orange-button">Yuborish</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p><b>StephenSchool Learning Center - Step To The Greatness!</b>.  Developed by: <b><a href="https://t.me/offcodev" rel="nofollow" target="_blank">offcodev</a></b></p>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/jquery/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/isotope.min.js"></script>
+  <script src="/js/owl-carousel.js"></script>
+  <script src="/js/counter.js"></script>
+  <script src="/js/custom.js"></script>
+
+  </body>
+
+
+
+
+
+
+
+
+  {{!-- Removed Sections --}}
+  
+  {{!--<div class="section testimonials">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="owl-carousel owl-testimonials">
+            <div class="item">
+              <p>“Please tell your friends or collegues about TemplateMo website. Anyone can access the website to download free templates. Thank you for visiting.”</p>
+              <div class="author">
+                <img src="/images/testimonial-author.jpg" alt="">
+                <span class="category">Full Stack Master</span>
+                <h4>Claude David</h4>
+              </div>
+            </div>
+            <div class="item">
+              <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravid.”</p>
+              <div class="author">
+                <img src="/images/testimonial-author.jpg" alt="">
+                <span class="category">UI Expert</span>
+                <h4>Thomas Jefferson</h4>
+              </div>
+            </div>
+            <div class="item">
+              <p>“Scholar is free website template provided by TemplateMo for educational related websites. This CSS layout is based on Bootstrap v5.3.0 framework.”</p>
+              <div class="author">
+                <img src="assets/images/testimonial-author.jpg" alt="">
+                <span class="category">Digital Animator</span>
+                <h4>Stella Blair</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 align-self-center">
+          <div class="section-heading">
+            <h6>TESTIMONIALS</h6>
+            <h2>What they say about us?</h2>
+            <p>You can search free CSS templates on Google using different keywords such as templatemo portfolio, templatemo gallery, templatemo blue color, etc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> --}}
+  
+  {{!-- <div class="section about-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-1">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Where shall we begin?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Dolor <strong>almesit amet</strong>, consectetur adipiscing elit, sed doesn't eiusmod tempor incididunt ut labore consectetur <code>adipiscing</code> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  How do we work together?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Dolor <strong>almesit amet</strong>, consectetur adipiscing elit, sed doesn't eiusmod tempor incididunt ut labore consectetur <code>adipiscing</code> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Why SCHOLAR is the best?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  There are more than one hundred responsive HTML templates to choose from <strong>Template</strong>Mo website. You can browse by different tags or categories.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Do we get the best support?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  You can also search on Google with specific keywords such as <code>templatemo business templates, templatemo gallery templates, admin dashboard templatemo, 3-column templatemo, etc.</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 align-self-center">
+          <div class="section-heading">
+            <h6>About Us</h6>
+            <h2>What make us the best academy online?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravid risus commodo.</p>
+            <div class="main-button">
+              <a href="#">Discover More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> --}}
+
+  {{!-- <div class="section events" id="events">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h6>Jadval</h6>
+            <h2>Tadbirlar</h2>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-6">
+          <div class="item">
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="image">
+                  <img src="/images/event-01.jpg" alt="">
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <ul>
+                  <li>
+                    <span class="category">Web Design</span>
+                    <h4>UI Best Practices</h4>
+                  </li>
+                  <li>
+                    <span>Kuni:</span>
+                    <h6>16 Feb 2036</h6>
+                  </li>
+                  <li>
+                    <span>Davomiyligi:</span>
+                    <h6>22 Hours</h6>
+                  </li>
+                  <li>
+                    <span>Narxi:</span>
+                    <h6>$120</h6>
+                  </li>
+                </ul>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div> --}}
+
+  {{!-- <div class="team section" id="team">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="team-member">
+            <div class="main-content">
+              <img src="/images/member-01.jpg" alt="">
+              <span class="category">UX Teacher</span>
+              <h4>Sophia Rose</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="team-member">
+            <div class="main-content">
+              <img src="/images/member-02.jpg" alt="">
+              <span class="category">Graphic Teacher</span>
+              <h4>Cindy Walker</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="team-member">
+            <div class="main-content">
+              <img src="/images/member-03.jpg" alt="">
+              <span class="category">Full Stack Master</span>
+              <h4>David Hutson</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="team-member">
+            <div class="main-content">
+              <img src="/images/member-04.jpg" alt="">
+              <span class="category">Digital Animator</span>
+              <h4>Stella Blair</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  --}}
