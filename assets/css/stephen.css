@@ -1410,7 +1410,7 @@ Contact Style
   font-size: x-large;
 }
 
-.card {
+.login-card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1567,6 +1567,9 @@ Contact Style
       margin-right: 6px; /* Ikon va matn orasidagi masofani moslash */
   }
 }
+
+/* 
+
 
 
 /* 

@@ -7,11 +7,17 @@ export default {
     formatDate_2(date) {
         return moment(date).format("DD-MM-YYYY")
     },
+    formatDate_3(date) {
+        return moment(date).format("DD.MM.YYYY")
+    },
     ifequal(a, b, options) {
         if(a === b) {
             return options.fn(this)
         }
 
         return options.inverse(this)
+    },
+      toFixed1(value) {
+        return Number(value).toFixed(1)
     }
 }

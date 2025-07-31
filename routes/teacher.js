@@ -77,12 +77,16 @@ router.get('/my-group/:id', async (req, res) => {
     const user = await Teacher.findById(userId)
     const studentIds = group.students
     const students = await Student.find({ _id: { $in: studentIds } }).populate()
-    const homeworks = group.homeworks.reverse()
-    const groupId = homeworks.groupId
-    console.log(groupId)
+    const tasks = group.tasks.reverse()
+    const taskAuthorIds = tasks.map(task => task.studentId)
+    const taskAuthor = await Student.find({ _id: {$in: taskAuthorIds } }).populate()
+    let count = 0
+    if(tasks.status === "Pending") {
+        count++;
+    }
+
     res.render('my-group', {
         title: "Mening Guruhim | O'qituvchi Paneli",
-        students: group.students,
         id,
         userId,
         firstName: user.firstName,
@@ -90,19 +94,41 @@ router.get('/my-group/:id', async (req, res) => {
         phoneNumber: user.phoneNumber,
         avatar: user.avatar,
         students,
-        homeworks,
-        groupId,
+        taskAuthor,
+        tasks,
+        count,
         groupError: req.flash('groupError'),
         inviteSuccess: req.flash('inviteSuccess')
     })
 })
+
+router.get('/my-group/:id/mock', async (req, res) => {
+    const id = req.params.id
+    const group = await Group.findById(id) 
+    const userId = group.teacherId // o'qituvchi idsi
+    const user = await Teacher.findById(userId) // o'qituvchi profili
+    const studentIds = group.students // studentlarning idlari
+    const students = await Student.find({ _id: { $in: studentIds } }).populate() // barcha studentlar 
+    res.render('mock', {
+        title: "Mock Natijalari | O'qituvchi Paneli",
+        id,
+        userId,
+        firstName: user.firstName,
+        surName: user.surName,
+        phoneNumber: user.phoneNumber,
+        avatar: user.avatar,
+        students,
+        examSuccess: req.flash('examSuccess')
+    })
+})
+
 
 router.get('/edit-group/:id', teacherMid, async (req, res) => {
     const id = req.params.id
     const userId = req.userId
     const user = await Teacher.findById(userId)
     const group = await Group.findById(id)
-    console.log(group)
+    
     res.render('edit-group', {
         layout: '',
         title: "Guruh Sozlamalari | O'qituvchi Paneli",
@@ -113,15 +139,6 @@ router.get('/edit-group/:id', teacherMid, async (req, res) => {
         phoneNumber: user.phoneNumber,
         avatar: user.avatar,
         editSuccess: req.flash("editSuccess")
-    })
-})
-
-router.get('/journal/:id', teacherMid, async (req, res) => {
-    const id = req.params.id
-    console.log(id)
-    res.render('journal', {
-        layout: "",
-        title: "Jurnal"
     })
 })
 
@@ -159,6 +176,7 @@ router.post('/teacher-update/:id', teacherMid, async (req, res) => {
     req.flash('settingsSuccess', "Parol Muvaffaqiyatli Yangilandi!")
     res.redirect(`/teacher-settings/${id}`)
 })  
+
 
 router.post('/create-group', teacherMid, async (req, res) => {
     const id = req.userId
@@ -206,8 +224,9 @@ router.post('/invite-student/:id', async (req, res) => {
         res.redirect(`/my-group/${groupId}`)
         return
     }
-    const studentGroup = student.group
-    if(studentGroup !== null) {
+    const group = student.group
+    const existGroup = await Group.findById(group)
+    if(existGroup !== null) {
         req.flash('groupError', 'Ushbu Student Allaqachon Guruhda!')
         res.redirect(`/my-group/${groupId}`)
         return
@@ -215,40 +234,6 @@ router.post('/invite-student/:id', async (req, res) => {
     await Student.findOneAndUpdate({phoneNumber}, {invitations: groupId}, {new: true})
     req.flash('inviteSuccess', "Taklifnoma Yuborildi!")
     res.redirect(`/my-group/${groupId}`)
-})
-
-router.post('/post-homework/:id', async (req, res) => {
-    const id = req.params.id
-    const homeworkLesson = req.body.homeworkLesson
-    const tasks = req.body.tasks
-    const homework = {
-        homeworkLesson: req.body.homeworkLesson,
-        tasks: req.body.tasks,
-        groupId: id
-    }
-    if(!homeworkLesson && !tasks) {
-        req.flash('groupError', "Barcha qatorlarni to'ldirish kerak!")
-        res.redirect(`/my-group/${id}`)
-        return
-    }
-    if(!homeworkLesson) {
-        req.flash('groupError', "Uyga Vazifa Mavzusini Kiriting!")
-        res.redirect(`/my-group/${id}`)
-        return
-    }
-    if(!tasks) {
-        req.flash('groupError', "Vazifa Berilishi Shart!")
-        res.redirect(`/my-group/${id}`)
-        return
-    }
-    const group = await Group.findByIdAndUpdate({_id: id}, { $push: {homeworks: homework} }, {new: true})
-    console.log(group.homeworks)
-    res.redirect(`/my-group/${id}`)
-})
-
-router.post('/delete-homework/:id', async (req, res) => {
-    const id = req.params.id
-    console.log(req.body)
 })
 
 router.post('/remove-student/:id', async (req, res) => {
@@ -259,7 +244,65 @@ router.post('/remove-student/:id', async (req, res) => {
     group.students = group.students.filter(id => id.toString() !== studentId);
     await group.save()
     res.redirect(`/my-group/${groupId}`)
-})          
+})     
+
+function roundIELTS(score) {
+    return parseFloat((Math.round(score * 2) / 2).toFixed(1));
+}
+
+router.post("/my-group/:id/mock", async (req, res) => {
+    const id = req.params.id
+    const { studentId, listeningScore, readingScore, writingScore, speakingScore, feedback } = req.body;
+    const student = await Student.findById(studentId) // studentni topish
+    const listening = parseFloat(listeningScore)
+    const reading = parseFloat(readingScore)
+    const writing = parseFloat(writingScore)
+    const speaking = parseFloat(speakingScore)
+    const mockResults = student.mockResults
+
+    const rawOverall = (listening + reading + writing + speaking) / 4
+    const overall = roundIELTS(rawOverall) 
+    
+    const examData = {
+        listeningScore: listening,
+        readingScore: reading, 
+        writingScore: writing, 
+        speakingScore: speaking,
+        overall,
+        feedback,
+        date: Date.now(),
+    }
+    mockResults.push(examData)
+    await student.save()
+
+    req.flash('examSuccess', "Natijalar muvaffaqiyatli yuborildi!")
+    res.redirect(`/my-group/${id}/mock`)
+})
+
+router.post('/task-checked/:id', async (req, res) => {
+    const taskId = req.params.id
+    const newStatus = req.body.taskStatus
+
+    try {
+        const group = await Group.findOne({"tasks._id": taskId})
+        if(!group) {
+            req.flash('groupError', 'Xatolik!')
+            return
+        }
+
+        const task = group.tasks.find(t => t.id === taskId)
+        if(task) {
+            task.status = newStatus
+        }
+
+        await group.save()
+        res.redirect('back')
+        console.log(task)
+    } catch (error) {
+        console.log(error)
+    }
+
+})
 
 
 export default router;

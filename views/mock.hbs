@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="header4-wrap">
                     <div class="header__logo">
-                        <h3><a style="color: #4272d7" href="/">StephenSchool</a></h3> 
+                      <h3><a style="color: #4272d7" href="/">StephenSchool</a></h3> 
                     </div>
                     <div class="header__tool">
                         <div class="header-button-item has-noti js-item-menu">
@@ -81,7 +81,7 @@
                                 </div>
                             </div> --}}
                         </div>
-                    {{!-- Profile --}}
+                    {{!-- Profile Settings --}}
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">
                                 <div class="image">
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                         </div>
-                    {{!-- Profile --}}
+                    {{!-- Profile Settings --}}
                     </div>
                 </div>
             </div>
@@ -141,19 +141,21 @@
             <section>
                 <div class="container">
                     <div class="row">
+                        <div class="col-xl-3">
+
                             <!-- MENU SIDEBAR-->
                             <aside class="menu-sidebar3 js-spe-sidebar">
                                 <nav class="navbar-sidebar2 navbar-sidebar3">
                                     <ul class="list-unstyled navbar__list">
                                         <li class="has-sub">
-                                        <a href="/teacher-dashboard/{{userId}}"><i class="fas fa-house"></i>Bosh Sahifa</a>                        
+                                <a href="/teacher-dashboard/{{id}}"><i class="fas fa-house"></i>Bosh Sahifa</a>                             
                                         </li>
                                         <li>
-                                            <a href="/teacher-profile/{{userId}}">
+                                            <a href="/teacher-profile/{{id}}">
                                                 <i class="fas fa-user"></i>Profil</a>
                                         </li>
-                                        <li>
-                                            <a href="/teacher-settings/{{userId}}">
+                                        <li class="has-sub">
+                                            <a href="/teacher-settings/{{id}}">
                                                 <i class="fas fa-cog"></i>Sozlamalar</a>
                                         </li>
                                     </ul>
@@ -161,26 +163,150 @@
                             </aside>
                             <!-- END MENU SIDEBAR-->
 
-                        {{!-- </div> --}}
+                        </div>
                         <div class="col-xl-9">
                             <!-- PAGE CONTENT-->
                             <div class="page-content">
-                        <div class="row">
-                            <div class="col-md-12">
                                
-                            </div>
-                        </div>
-                        <br>
-
-                    <!-- DATA TABLE -->
-                    
-                    
-                    </div>
-                    <!-- END DATA TABLE -->
                                 <div class="row">
+                                    <div class="col-md-12">
+                    <section>
+                        <div class="container-fluid">
+                        <div class="content-wrapper">
+                                <div class="col-lg-6">
+                            <div class="card">
+                                    <div class="card-header">
+                                        <strong>Mock</strong> Natijalari 
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <form action="" method="post">
+                                            <label for="sub" class=" form-control-label">O'quvchi</label>
+                                            <select name="studentId" id="student" class="form-control">
+                                                {{#each students}}
+                                            <option value={{id}}>{{firstName}} {{surName}}</option>
+                                                {{/each}}
+                                            </select>
+                                            <br>
+                                            <label for="listeningScore" class=" form-control-label">Listening ball</label>
+                                            <select name="listeningScore" id="listeningScore" class="form-control">
+                                                <option value="9.0">9.0</option>
+                                                <option value="8.5">8.5</option>
+                                                <option value="8.0">8.0</option>
+                                                <option value="7.5">7.5</option>
+                                                <option value="7.0">7.0</option>
+                                                <option value="6.5">6.5</option>
+                                                <option value="6.0">6.0</option>
+                                                <option value="5.5">5.5</option>
+                                                <option value="5.0">5.0</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                         <br>
+                                            <label for="readingScore" class=" form-control-label">Reading ball</label>
+                                            <select name="readingScore" id="readingScore" class="form-control">
+                                                <option value="9.0">9.0</option>
+                                                <option value="8.5">8.5</option>
+                                                <option value="8.0">8.0</option>
+                                                <option value="7.5">7.5</option>
+                                                <option value="7.0">7.0</option>
+                                                <option value="6.5">6.5</option>
+                                                <option value="6.0">6.0</option>
+                                                <option value="5.5">5.5</option>
+                                                <option value="5.0">5.0</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                         <br>
+                                             <label for="writingScore" class=" form-control-label">Writing ball</label>
+                                            <select name="writingScore" id="writingScore" class="form-control">
+                                                <option value="9.0">9.0</option>
+                                                <option value="8.5">8.5</option>
+                                                <option value="8.0">8.0</option>
+                                                <option value="7.5">7.5</option>
+                                                <option value="7.0">7.0</option>
+                                                <option value="6.5">6.5</option>
+                                                <option value="6.0">6.0</option>
+                                                <option value="5.5">5.5</option>
+                                                <option value="5.0">5.0</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                         <br>
+                                         <label for="speakingScore" class=" form-control-label">Speaking ball</label>
+                                            <select name="speakingScore" id="speakingScore" class="form-control">
+                                                <option value="9.0">9.0</option>
+                                                <option value="8.5">8.5</option>
+                                                <option value="8.0">8.0</option>
+                                                <option value="7.5">7.5</option>
+                                                <option value="7.0">7.0</option>
+                                                <option value="6.5">6.5</option>
+                                                <option value="6.0">6.0</option>
+                                                <option value="5.5">5.5</option>
+                                                <option value="5.0">5.0</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                            <br>
+                                        <label for="feedback" class=" form-control-label">Feedback</label>
+                                        <div class="col-12 col-md-9">
+                                    <textarea name="feedback" id="textarea-input" rows="5" placeholder="" class="form-control"></textarea>
+                                        </div>
+                                        <br>
+                                         <button type="submit" class="btn btn-primary btn-sm">
+                                             Yuborish <i class="fa fa-paper-plane"></i>
+                                        </button>
+                                        </form>
+                                    </div>
+                                   
+                                </div>
+                        </div>
+                            </div>
+                            </div>
+                    </section>
+                                </div>
+                                </div>
+
+    {{#if createError}}                            
+    <div class="error">
+        <div class="error__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"><path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path></svg>
+        </div>
+        <div class="error__title">{{createError}}</div>
+        <div class="error__close"><svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20"><path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path></svg></div>
+    </div>
+    <script>
+        document.querySelector('.error__close').addEventListener('click', function () {
+        const errorElement = document.querySelector('.error');
+        errorElement.style.display = 'none';});
+    </script>
+    {{/if}}
+
+    {{!-- success --}}
+    {{#if examSuccess}}
+    <div class="success">
+    <svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M10 15.172l-3.95-3.95-1.414 1.414L10 18l9-9-1.414-1.414z"></path>
+    </svg>
+    <span class="success__title">{{examSuccess}}</span>
+    <svg class="success__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+    </svg>
+    </div>
+    <script>
+     const successElement = document.querySelector('.success');   
+    document.querySelector('.success__close').addEventListener('click', function () {
+    const successElement = document.querySelector('.success');
+    successElement.style.display = 'none';});
+    if (successElement) {
+            // 5 soniyadan keyin elementni yashiramiz
+            setTimeout(() => {
+                successElement.style.display = 'none';
+            }, 10000); // 5000ms = 5 sekund
+        }
+    </script>
+    {{/if}}
+
+                                 <div class="row">
                                 <div class="col-md-12">
                                     <div class="copyright text-center py-3" style="background-color: #f8f9fa;">
-                                 <p><b>StephenSchool</b> Learning Center. Developed by <a style="color: black;" href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
+                                 <p><b>StephenSchool Learning Center.</b> 
+                    <b style="text-decoration: underline;">v1.1.3</b></p>
                                    </div>
                                 </div>
                                 </div>

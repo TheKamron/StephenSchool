@@ -23,6 +23,15 @@ const StudentSchema = new Schema({
         ref: "Group",
         default: null,
     },
+    mockResults: [{
+        listeningScore: {type: Number},
+        readingScore: {type: Number},
+        writingScore: {type: Number},
+        speakingScore: {type: Number},
+        overall: {type: Number},
+        feedback: {type: String},
+        date: {type: Date}
+    }],
     status: {type: String},
     admin: {type: String, default: false}
 }, {timestamps: true})

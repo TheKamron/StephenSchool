@@ -16,11 +16,14 @@ const GroupSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Student'
     }],
-    homeworks: [{
-        homeworkLesson: {type: String, required: true},
-        tasks: {type: String, required: true},
-        groupId: {type: String, required: true},
-        postedAt: { type: Date, default: Date.now}
+    tasks: [{
+        image: [{type: String, required: true}],
+        studentId: {type: Schema.Types.ObjectId, required: true, ref: "Student"},
+        firstName: {type: String},
+        surName: {type: String},
+        avatar: {type: String},
+        status: {type: String},
+        date: {type: Date}
     }]
 }, {timestamps: true})
 
