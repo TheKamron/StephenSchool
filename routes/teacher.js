@@ -80,10 +80,6 @@ router.get('/my-group/:id', async (req, res) => {
     const tasks = group.tasks.reverse()
     const taskAuthorIds = tasks.map(task => task.studentId)
     const taskAuthor = await Student.find({ _id: {$in: taskAuthorIds } }).populate()
-    let count = 0
-    if(tasks.status === "Pending") {
-        count++;
-    }
 
     res.render('my-group', {
         title: "Mening Guruhim | O'qituvchi Paneli",
@@ -96,7 +92,6 @@ router.get('/my-group/:id', async (req, res) => {
         students,
         taskAuthor,
         tasks,
-        count,
         groupError: req.flash('groupError'),
         inviteSuccess: req.flash('inviteSuccess')
     })

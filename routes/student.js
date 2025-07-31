@@ -47,7 +47,7 @@ router.get('/student-dashboard/:id', studentMiddleware, async (req,res) => {
     const inviteInfo = await Group.findById(invitation)
     const group = await Group.findById(studentGroup)
     const tasks = group.tasks
-    const myTasks = tasks.filter(task => task.studentId.toString() == id.toString())
+    const myTasks = tasks.filter(task => task.studentId.toString() == id.toString()).reverse()
 
     res.render('student-dash', {
         layout: '',

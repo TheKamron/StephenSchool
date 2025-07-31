@@ -404,20 +404,25 @@
                                     </div>
                                     <div class="au-inbox-wrap ">
                                         <div class="au-message">
-                                            <div class="au-message__noti">
-                                                <p>Yangi topshiriqlar soni: <span>{{count}}</span>
-                                                </p>
-                                            </div>
+                                            
                                             <div class="au-task-list">
                                                 {{#each tasks}}
                                               <div class="au-message__item unread">
                                                     <div class="au-message__item-inner">
                                                         <div class="au-message__item-text">
+                                                            {{#ifequal status "Pending"}}
+                                                            <div class="avatar-wrap online">
+                                                                <div class="avatar">
+                                                                    <img src="/images/{{avatar}}.png" alt="Avatar">
+                                                                </div>
+                                                            </div>
+                                                            {{else}}
                                                             <div class="avatar-wrap">
                                                                 <div class="avatar">
                                                                     <img src="/images/{{avatar}}.png" alt="Avatar">
                                                                 </div>
                                                             </div>
+                                                            {{/ifequal}}
                                                             <div class="text">
                                                                 <h5 class="name">{{firstName}} {{surName}}</h5>
                                                                 <form action="/task-checked/{{this.id}}" method="post">

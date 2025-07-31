@@ -15492,6 +15492,65 @@ section {
     transform: scale(1.05);
   }
   
+  @media (max-width: 768px) {
+    .form {
+      padding: 1.5rem 1rem;
+      font-size: 1rem;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  
+    .form-title {
+      font-size: 1.5rem;
+    }
+  
+    .form-paragraph {
+      font-size: 0.875rem;
+    }
+  
+    .drop-container {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      gap: 8px;
+    }
+  
+    .drop-title {
+      font-size: 1.1rem;
+    }
+  
+    #file-input {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 6px;
+    }
+  
+    #file-input::file-selector-button,
+    #disabled-file-input::file-selector-button {
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+  
+    .upd-button {
+      width: 100%;
+      font-size: 1rem;
+      padding: 10px;
+      height: auto;
+      margin-top: 1rem;
+    }
+  
+    .upd-text {
+      margin: 0;
+    }
+  
+    .upload-file-container {
+      flex-direction: column;
+      min-height: auto;
+      padding: 1rem;
+    }
+  }
+  
+
   /* Overlay ko'rinishi */
   .image-overlay {
     position: fixed;
@@ -15515,6 +15574,7 @@ section {
   .image-overlay.active {
     display: flex;
   }
+
   .taskStatus {
     padding: 6px 10px;
     border-radius: 6px;
