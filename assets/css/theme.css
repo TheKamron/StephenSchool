@@ -3546,6 +3546,10 @@ section {
     border-left: 7px solid #00ad5f;
 }
 
+.au-task__item--pending .au-task__item-inner {
+    border-left: 7px solid #999;
+}
+
 .au-task__footer {
     text-align: center;
     padding-top: 35px;
