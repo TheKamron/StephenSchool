@@ -127,7 +127,7 @@ router.get('/student-profile/:id', studentMiddleware, async (req, res) => {
 router.get('/exam-results/:id', async (req, res) => {
     const id = req.params.id
     const user = await Student.findById(id)
-    const mockResults = user.mockResults    
+    const mockResults = user.mockResults   
     res.render('exam-results', {
         title: "Mock Natijalarim | Student Paneli",
         id,
