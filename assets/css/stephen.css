@@ -1690,6 +1690,76 @@ body {
   }
 }
 
+.redes {
+  position: fixed;
+  right: 5px;
+  bottom: 40px;
+  width: 80px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.redes a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 40px;
+  transition: all 0.2s ease-in-out;
+}
+
+.redes a svg {
+  width: 30px;
+  fill: #ffffff;
+}
+
+.redes .instagram {
+  background: linear-gradient(45deg, #833ab4, #fd1d1d, #f56040);
+  border-radius: 0 10px 0 0;
+}
+
+.redes .youtube {
+  background: linear-gradient(135deg, #e52d27, #b31217);
+}
+
+.redes .telegram {
+  background-color: #006aff;
+  border-radius: 0 0 0 10px;
+}
+
+.redes a:hover {
+  width: 100%;
+  border-radius: 0 10px 10px 0;
+}
+
+/* 📱 Mobil ekranlar uchun */
+@media (max-width: 768px) {
+  .redes {
+    right: 0;             /* O‘ngga yopishtiramiz */
+    bottom: 40px;         /* Pastroqqa tushiramiz */
+    width: 60px;          /* Kichikroq qilib qo‘yamiz */
+  }
+
+  .redes a {
+    width: 60px;
+    height: 50px;         /* Barmoq bilan bosish uchun qulayroq */
+  }
+
+  .redes a svg {
+    width: 24px;          /* Icon biroz kichrayadi */
+    height: 24px;
+  }
+
+  .redes a:hover {
+    width: 65px;          /* Telefonlarda hover yo‘q, shuning uchun kamroq ta’sir */
+  }
+}
+
+
+
+
 @media (max-width: 992px) {
   .header-area .main-nav #search input,
   .header-area .main-nav #search i {
