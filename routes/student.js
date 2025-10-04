@@ -7,13 +7,12 @@ import moment from "moment"
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { upload } from '../middleware/upload.js';
-import { uploadToImgbb } from '../utils/uploadToImgbb.js';
+// import { uploadToImgbb } from '../utils/uploadToImgbb.js';
 
 const router = Router()
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 router.get('/student-dashboard', studentMiddleware, (req, res) => {
     res.redirect(`/student-dashboard/${req.userId}`)
@@ -25,6 +24,7 @@ router.get('/student-dashboard/:id', studentMiddleware, async (req,res) => {
     const invitation = user.invitations
     const userGroupId = user.group
     const existGroup = await Group.findById(userGroupId)
+    console.log(user)
 
     if(existGroup === null) {
     const inviteInfo = await Group.findById(invitation)             
@@ -90,7 +90,8 @@ router.get('/student-profile/:id', studentMiddleware, async (req, res) => {
     const birthYear = moment(user.birthDate).year();
     const currentYear = moment().year();
     const age = currentYear - birthYear;
-    console.log(group)
+    
+    
     if(group === null) {
     res.render('student-profile', {
         layout: "",
@@ -193,50 +194,59 @@ router.post('/cancel/:id', async (req, res) => {
     res.redirect(`/student-dashboard/${userId}`)
 })
 
-router.post('/send-task/:id', upload.array('taskFile', 10), async (req, res) => {
-    try {
-        const id = req.params.id
-        const user = await Student.findById(id)
-        const groupId = user.group
-        const group = await Group.findById(groupId)
-        const uploadedFiles = req.files;
-    
-        if (!uploadedFiles || uploadedFiles.length === 0) {
-          return res.status(400).send('Fayl topilmadi');
-        }
-    
-        const uploadedUrls = [];
-    
-        for (const file of uploadedFiles) {
-          const imageUrl = await uploadToImgbb(file.path);
-          uploadedUrls.push(imageUrl);         
-        }
-    
-       const newTask = {
-            image: uploadedUrls,
-            studentId: id,
-            firstName: user.firstName,
-            surName: user.surName,
-            avatar: user.avatar,
-            status: 'Pending',
-            date: Date.now()
-       }
+router.post("/send-task/:id", upload.array("taskFile", 10), async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await Student.findById(id);
+    const groupId = user.group;
+    const group = await Group.findById(groupId);
+    const uploadedFiles = req.files;
 
-       if(!group) {
-          return res.redirect(`/student-dashboard/${id}`)
-       }
+    if (!uploadedFiles || uploadedFiles.length === 0) {
+      return res.status(400).send("Fayl topilmadi");
+    }
 
-       group.tasks.push(newTask)
-       await group.save()
+    const uploadedFileKeys = [];
 
-        req.flash('taskSuccess', "Topshiriq muvaffaqiyatli yuborildi!")
-        res.redirect(`/student-dashboard/${id}`)
-    } catch (error) {
-        console.error('Xatolik:', error.message);
-        res.status(500).send('Serverda xatolik yuz berdi');
-        res.redirect('back')
-      }
-    
-})
+    for (const file of uploadedFiles) {
+      const fileKey = `homeworks/${Date.now()}-${file.originalname}`;
+
+      const params = {
+        Bucket: process.env.B2_BUCKET,
+        Key: fileKey,
+        Body: file.buffer, // ❗ bevosita buffer’dan yuklaymiz
+        ContentType: file.mimetype,
+      };
+
+      await s3.upload(params).promise();
+
+      uploadedFileKeys.push(fileKey);
+    }
+
+    const newTask = {
+      image: uploadedFileKeys, // DB’da faqat fileKey saqlanadi
+      studentId: id,
+      firstName: user.firstName,
+      surName: user.surName,
+      avatar: user.avatar,
+      status: "Pending",
+      date: Date.now(),
+    };
+
+    if (!group) {
+      return res.redirect(`/student-dashboard/${id}`);
+    }
+
+    group.tasks.push(newTask);
+    await group.save();
+
+    req.flash("taskSuccess", "Topshiriq muvaffaqiyatli yuborildi!");
+    res.redirect(`/student-dashboard/${id}`);
+  } catch (error) {
+    console.error("Xatolik:", error.message);
+    res.status(500).send("Serverda xatolik yuz berdi");
+    res.redirect("back");
+  }
+});
 
 export default router;

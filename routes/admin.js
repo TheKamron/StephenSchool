@@ -133,7 +133,6 @@ router.get('/new-course', adminMid, async(req, res) => {
     })
 })
 
-
 // POST
 router.post('/admin-login', async (req, res) => {
     const {userName, password } = req.body
@@ -171,7 +170,7 @@ router.post('/add-student',  async (req, res) => {
         role,
         gender,
         birthDate,
-        avatar: gender,
+        avatar: `${gender}.png`,
     }
     const data = await Student.create(studentData)
     const token = generateJWTToken(data._id)
