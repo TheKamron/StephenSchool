@@ -7,6 +7,7 @@ import moment from "moment"
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { upload } from '../middleware/upload.js';
+import s3 from "../config/b2.js"
 // import { uploadToImgbb } from '../utils/uploadToImgbb.js';
 
 const router = Router()
@@ -24,7 +25,6 @@ router.get('/student-dashboard/:id', studentMiddleware, async (req,res) => {
     const invitation = user.invitations
     const userGroupId = user.group
     const existGroup = await Group.findById(userGroupId)
-    console.log(user)
 
     if(existGroup === null) {
     const inviteInfo = await Group.findById(invitation)             
@@ -195,36 +195,43 @@ router.post('/cancel/:id', async (req, res) => {
 })
 
 router.post("/send-task/:id", upload.array("taskFile", 10), async (req, res) => {
-  try {
-    const id = req.params.id;
-    const user = await Student.findById(id);
-    const groupId = user.group;
-    const group = await Group.findById(groupId);
-    const uploadedFiles = req.files;
+  const { id } = req.params;
 
-    if (!uploadedFiles || uploadedFiles.length === 0) {
-      return res.status(400).send("Fayl topilmadi");
+  try {
+    const user = await Student.findById(id);
+    const group = await Group.findById(user.group);
+
+    if (!req.files || req.files.length === 0) {
+      req.flash("taskError", "Fayl topilmadi!");
+      return res.redirect(`/student-dashboard/${id}`);
     }
 
-    const uploadedFileKeys = [];
+    const uploadedUrls = [];
 
-    for (const file of uploadedFiles) {
+    for (const file of req.files) {
       const fileKey = `homeworks/${Date.now()}-${file.originalname}`;
 
       const params = {
         Bucket: process.env.B2_BUCKET,
         Key: fileKey,
-        Body: file.buffer, // ❗ bevosita buffer’dan yuklaymiz
+        Body: file.buffer,
         ContentType: file.mimetype,
       };
 
       await s3.upload(params).promise();
 
-      uploadedFileKeys.push(fileKey);
+      // Faylga kirish uchun URL (1 kunlik presigned link)
+      const fileUrl = s3.getSignedUrl("getObject", {
+        Bucket: process.env.B2_BUCKET,
+        Key: fileKey,
+        Expires: 24 * 60 * 60, // 1 kun
+      });
+
+      uploadedUrls.push(fileUrl);
     }
 
     const newTask = {
-      image: uploadedFileKeys, // DB’da faqat fileKey saqlanadi
+      image: uploadedUrls,
       studentId: id,
       firstName: user.firstName,
       surName: user.surName,
@@ -233,19 +240,15 @@ router.post("/send-task/:id", upload.array("taskFile", 10), async (req, res) => 
       date: Date.now(),
     };
 
-    if (!group) {
-      return res.redirect(`/student-dashboard/${id}`);
-    }
-
     group.tasks.push(newTask);
     await group.save();
 
     req.flash("taskSuccess", "Topshiriq muvaffaqiyatli yuborildi!");
     res.redirect(`/student-dashboard/${id}`);
   } catch (error) {
-    console.error("Xatolik:", error.message);
-    res.status(500).send("Serverda xatolik yuz berdi");
-    res.redirect("back");
+    console.error("Xatolik:", error);
+    req.flash("taskError", "Serverda xatolik yuz berdi!");
+    res.redirect(`/student-dashboard/${id}`);
   }
 });
 
