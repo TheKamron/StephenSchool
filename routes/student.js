@@ -248,7 +248,6 @@ router.post("/send-task/:id", upload.array("taskFile", 10), async (req, res) => 
   } catch (error) {
     console.error("Xatolik:", error);
     req.flash("taskError", "Serverda xatolik yuz berdi!");
-    res.redirect(`/student-dashboard/${id}`);
   }
 });
 
