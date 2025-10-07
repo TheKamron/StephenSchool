@@ -1,13 +1,15 @@
-import AWS from "aws-sdk"
-import dotenv from "dotenv"
+import { S3Client } from "@aws-sdk/client-s3";
+import dotenv from "dotenv";
 
-dotenv.config()
-const s3 = new AWS.S3({
+dotenv.config();
+
+const s3 = new S3Client({
   endpoint: `https://${process.env.B2_ENDPOINT}`,
   region: process.env.B2_REGION,
-  accessKeyId: process.env.B2_KEY_ID,
-  secretAccessKey: process.env.B2_APP_KEY,
-  signatureVersion: "v4"
+  credentials: {
+    accessKeyId: process.env.B2_KEY_ID,
+    secretAccessKey: process.env.B2_APP_KEY,
+  },
 });
 
 export default s3;

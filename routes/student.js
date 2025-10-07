@@ -1,288 +1,315 @@
-import { Router } from "express"
-import studentMiddleware from "../middleware/studentMid.js"
-import Student from "../models/Student.js"
-import Group from "../models/Group.js"
-import bcrypt from "bcryptjs"
-import moment from "moment"
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { upload } from '../middleware/upload.js';
-import s3 from "../config/b2.js"
+import { Router } from "express";
+import studentMiddleware from "../middleware/studentMid.js";
+import Student from "../models/Student.js";
+import Group from "../models/Group.js";
+import bcrypt from "bcryptjs";
+import moment from "moment";
+import path from "path";
+import s3 from "../config/b2.js";
 import FormData from "form-data";
-import axios from "axios"
-import sharp from "sharp"
+import axios from "axios";
+import { fileURLToPath } from "url";
+import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { upload } from "../middleware/upload.js";
 
-const router = Router()
+const router = Router();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-router.get('/student-dashboard', studentMiddleware, (req, res) => {
-    res.redirect(`/student-dashboard/${req.userId}`)
-})
+router.get("/student-dashboard", studentMiddleware, (req, res) => {
+  res.redirect(`/student-dashboard/${req.userId}`);
+});
 
-router.get('/student-dashboard/:id', studentMiddleware, async (req,res) => {
-    const id = req.userId
-    const user = await Student.findById(id)
-    const invitation = user.invitations
-    const userGroupId = user.group
-    const existGroup = await Group.findById(userGroupId)
+router.get("/student-dashboard/:id", studentMiddleware, async (req, res) => {
+  const id = req.userId;
+  const user = await Student.findById(id);
+  const invitation = user.invitations;
+  const userGroupId = user.group;
+  const existGroup = await Group.findById(userGroupId);
 
-    if(existGroup === null) {
-    const inviteInfo = await Group.findById(invitation)             
+  if (existGroup === null) {
+    const inviteInfo = await Group.findById(invitation);
 
-    res.render('student-dash', {
-        layout: '',
-        title: 'Student Paneli | StephenSchool',
-        firstName: user.firstName,
-        surName: user.surName,
-        phoneNumber: user.phoneNumber,
-        avatar: user.avatar,
-        invitation,
-        inviteInfo,
-        id,
-        existGroup
-    })
-       return     
-    }  
-    const studentGroup = user.group._id
-    const inviteInfo = await Group.findById(invitation)
-    const group = await Group.findById(studentGroup)
-    const tasks = group.tasks
-    const myTasks = tasks.filter(task => task.studentId.toString() == id.toString()).reverse()
+    res.render("student-dash", {
+      layout: "",
+      title: "Student Paneli | StephenSchool",
+      firstName: user.firstName,
+      surName: user.surName,
+      phoneNumber: user.phoneNumber,
+      avatar: user.avatar,
+      invitation,
+      inviteInfo,
+      id,
+      existGroup,
+    });
+    return;
+  }
+  const studentGroup = user.group._id;
+  const inviteInfo = await Group.findById(invitation);
+  const group = await Group.findById(studentGroup);
+  const tasks = group.tasks;
+  const myTasks = tasks
+    .filter((task) => task.studentId.toString() == id.toString())
+    .reverse();
 
-    res.render('student-dash', {
-        layout: '',
-        title: 'Student Paneli | StephenSchool',
-        firstName: user.firstName,
-        surName: user.surName,
-        phoneNumber: user.phoneNumber,
-        avatar: user.avatar,
-        studentGroup,
-        group,
-        invitation,
-        inviteInfo,
-        id,
-        myTasks,
-        taskSuccess: req.flash('taskSuccess'),
-    }) 
-})
+  res.render("student-dash", {
+    layout: "",
+    title: "Student Paneli | StephenSchool",
+    firstName: user.firstName,
+    surName: user.surName,
+    phoneNumber: user.phoneNumber,
+    avatar: user.avatar,
+    studentGroup,
+    group,
+    invitation,
+    inviteInfo,
+    id,
+    myTasks,
+    taskSuccess: req.flash("taskSuccess"),
+  });
+});
 
-router.get('/student-settings/:id', studentMiddleware, async (req, res) => {
-    const id = req.userId
-    const user = await Student.findById(id)
-    res.render('student-settings', {
-        layout: "",
-        title: "Sozlamalar | Student Paneli",
-        firstName: user.firstName,
-        surName: user.surName,
-        phoneNumber: user.phoneNumber,
-        id,
-        avatar: user.avatar,
-        settingsError: req.flash('settingsError'),
-        success: req.flash('success')
-    })
-})
+router.get("/student-settings/:id", studentMiddleware, async (req, res) => {
+  const id = req.userId;
+  const user = await Student.findById(id);
+  res.render("student-settings", {
+    layout: "",
+    title: "Sozlamalar | Student Paneli",
+    firstName: user.firstName,
+    surName: user.surName,
+    phoneNumber: user.phoneNumber,
+    id,
+    avatar: user.avatar,
+    settingsError: req.flash("settingsError"),
+    success: req.flash("success"),
+  });
+});
 
-router.get('/student-profile/:id', studentMiddleware, async (req, res) => {
-    const id = req.userId
-    const user = await Student.findById(id)
-    const groupId = user.group
-    const group = await Group.findById(groupId)
-    const birthYear = moment(user.birthDate).year();
-    const currentYear = moment().year();
-    const age = currentYear - birthYear;
-    
-    
-    if(group === null) {
-    res.render('student-profile', {
-        layout: "",
-        title: "Mening Profilim | Student Paneli",
-        firstName: user.firstName,
-        surName: user.surName,
-        phoneNumber: user.phoneNumber,
-        avatar: user.avatar,
-        birthDate: user.birthDate,
-        user,
-        id,
-        age
-    })        
-    } else {
-        const group = await Group.findById(groupId)
-        res.render('student-profile', {
-            layout: "",
-            title: "Mening Profilim | Student Paneli",
-            firstName: user.firstName,
-            surName: user.surName,
-            phoneNumber: user.phoneNumber,
-            avatar: user.avatar,
-            birthDate: user.birthDate,
-            groupName: group.groupName,
-            groupSubject: group.subject,
-            groupLevel: group.level,
-            group,
-            id,
-            age
-        })   
-    }
-})
+router.get("/student-profile/:id", studentMiddleware, async (req, res) => {
+  const id = req.userId;
+  const user = await Student.findById(id);
+  const groupId = user.group;
+  const group = await Group.findById(groupId);
+  const birthYear = moment(user.birthDate).year();
+  const currentYear = moment().year();
+  const age = currentYear - birthYear;
 
-router.get('/exam-results/:id', async (req, res) => {
-    const id = req.params.id
-    const user = await Student.findById(id)
-    const mockResults = user.mockResults   
-    res.render('exam-results', {
-        title: "Mock Natijalarim | Student Paneli",
-        id,
-        firstName: user.firstName,
-        surName: user.surName,
-        phoneNumber: user.phoneNumber,        
-        avatar: user.avatar,
-        mockResults,    
-    })
+  if (group === null) {
+    res.render("student-profile", {
+      layout: "",
+      title: "Mening Profilim | Student Paneli",
+      firstName: user.firstName,
+      surName: user.surName,
+      phoneNumber: user.phoneNumber,
+      avatar: user.avatar,
+      birthDate: user.birthDate,
+      user,
+      id,
+      age,
+    });
+  } else {
+    const group = await Group.findById(groupId);
+    res.render("student-profile", {
+      layout: "",
+      title: "Mening Profilim | Student Paneli",
+      firstName: user.firstName,
+      surName: user.surName,
+      phoneNumber: user.phoneNumber,
+      avatar: user.avatar,
+      birthDate: user.birthDate,
+      groupName: group.groupName,
+      groupSubject: group.subject,
+      groupLevel: group.level,
+      group,
+      id,
+      age,
+    });
+  }
+});
 
-})
+router.get("/exam-results/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await Student.findById(id);
+  const mockResults = user.mockResults;
+  res.render("exam-results", {
+    title: "Mock Natijalarim | Student Paneli",
+    id,
+    firstName: user.firstName,
+    surName: user.surName,
+    phoneNumber: user.phoneNumber,
+    avatar: user.avatar,
+    mockResults,
+  });
+});
 
 // POST
 
-router.post('/student-update/:id', studentMiddleware, async (req, res) => {
-    const {password, newPassword, avatar} = req.body
-    const id = req.userId
-    if(!newPassword && !password) {
-        req.flash('settingsError', "Barcha qatorlar to'ldirilishi shart!")
-        res.redirect(`/student-settings/${id}`)
-        return
-    }
-
-    if(!password) {
-        req.flash('settingsError', "Yangi Parolni Kiriting!")
-        res.redirect(`/student-settings/${id}`)
-        return
-    }
-
-    
-    if(!newPassword) {
-        req.flash('settingsError', "Yangi Parolni Tasdiqlang!")
-        res.redirect(`/student-settings/${id}`)
-        return
-    }
-
-    if(password !== newPassword) {
-        req.flash('settingError', "Parollar mos emas!")
-        res.redirect(`/student-settings/${id}`)
-        return
-    }
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10)
-    await Student.findByIdAndUpdate(id, {password: hashedPassword}, {new: true})
-    req.flash('success', "Parol Muvaffaqiyatli O'zgartirildi!")
-    res.redirect(`/student-settings/${id}`)
-})
-
-router.post("/student-update-avatar/:id", upload.single("avatar"), async (req, res) => {
-  try {
-    const { id } = req.params;
-    const image = req.file;
-
-    if (!image) {
-      return res.status(400).send("Rasm tanlanmadi");
-    }
-
-    // imgbb'ga yuborish
-    const formData = new FormData();
-    formData.append("image", image.buffer.toString("base64"));
-
-    const imgbbRes = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${process.env.API_KEY}`,
-      formData,
-      { headers: formData.getHeaders() }
-    );
-
-    const avatarUrl = imgbbRes.data.data.url;
-
-    // MongoDB’da yangilaymiz
-    await Student.findByIdAndUpdate(id, { avatar: avatarUrl });
-
+router.post("/student-update/:id", studentMiddleware, async (req, res) => {
+  const { password, newPassword, avatar } = req.body;
+  const id = req.userId;
+  if (!newPassword && !password) {
+    req.flash("settingsError", "Barcha qatorlar to'ldirilishi shart!");
     res.redirect(`/student-settings/${id}`);
-  } catch (error) {
-    console.error("Avatar yangilashda xatolik:", error);
-    res.status(500).send("Xatolik yuz berdi");
+    return;
   }
+
+  if (!password) {
+    req.flash("settingsError", "Yangi Parolni Kiriting!");
+    res.redirect(`/student-settings/${id}`);
+    return;
+  }
+
+  if (!newPassword) {
+    req.flash("settingsError", "Yangi Parolni Tasdiqlang!");
+    res.redirect(`/student-settings/${id}`);
+    return;
+  }
+
+  if (password !== newPassword) {
+    req.flash("settingError", "Parollar mos emas!");
+    res.redirect(`/student-settings/${id}`);
+    return;
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  await Student.findByIdAndUpdate(
+    id,
+    { password: hashedPassword },
+    { new: true }
+  );
+  req.flash("success", "Parol Muvaffaqiyatli O'zgartirildi!");
+  res.redirect(`/student-settings/${id}`);
 });
 
-router.post('/join/:id', studentMiddleware, async (req, res) => {
-    const groupId = req.params.id
-    const userId = req.userId
-    await Group.findByIdAndUpdate({_id: groupId}, { $push: { students: userId } }, {new: true})
-    await Student.findByIdAndUpdate({_id: userId}, {group: groupId, invitations: null}, {new: true})
-  
-    res.redirect(`/student-dashboard/${userId}`)
-})
+router.post(
+  "/student-update-avatar/:id",
+  upload.single("avatar"),
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const image = req.file;
 
-router.post('/cancel/:id', async (req, res) => {
-    const userId = req.params.id
-    
-    await Student.findByIdAndUpdate({_id: userId}, {invitations: null}, {new: true})
+      if (!image) {
+        return res.status(400).send("Rasm tanlanmadi");
+      }
 
-    res.redirect(`/student-dashboard/${userId}`)
-})
+      // imgbb'ga yuborish
+      const formData = new FormData();
+      formData.append("image", image.buffer.toString("base64"));
 
-router.post("/send-task/:id", upload.array("taskFile", 10), async (req, res) => {
-  const { id } = req.params;
+      const imgbbRes = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${process.env.API_KEY}`,
+        formData,
+        { headers: formData.getHeaders() }
+      );
 
-  try {
-    const user = await Student.findById(id);
-    const group = await Group.findById(user.group);
+      const avatarUrl = imgbbRes.data.data.url;
 
-    if (!req.files || req.files.length === 0) {
-      req.flash("taskError", "Fayl topilmadi!");
-      return res.redirect(`/student-dashboard/${id}`);
+      // MongoDB’da yangilaymiz
+      await Student.findByIdAndUpdate(id, { avatar: avatarUrl });
+
+      res.redirect(`/student-settings/${id}`);
+    } catch (error) {
+      console.error("Avatar yangilashda xatolik:", error);
+      res.status(500).send("Xatolik yuz berdi");
     }
+  }
+);
 
-    const uploadedUrls = [];
+router.post("/join/:id", studentMiddleware, async (req, res) => {
+  const groupId = req.params.id;
+  const userId = req.userId;
+  await Group.findByIdAndUpdate(
+    { _id: groupId },
+    { $push: { students: userId } },
+    { new: true }
+  );
+  await Student.findByIdAndUpdate(
+    { _id: userId },
+    { group: groupId, invitations: null },
+    { new: true }
+  );
 
-    for (const file of req.files) {
-      const fileKey = `homeworks/${Date.now()}-${file.originalname}`;
+  res.redirect(`/student-dashboard/${userId}`);
+});
 
-      const params = {
-        Bucket: process.env.B2_BUCKET,
-        Key: fileKey,
-        Body: file.buffer,
-        ContentType: file.mimetype,
+router.post("/cancel/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  await Student.findByIdAndUpdate(
+    { _id: userId },
+    { invitations: null },
+    { new: true }
+  );
+
+  res.redirect(`/student-dashboard/${userId}`);
+});
+
+router.post(
+  "/send-task/:id",
+  upload.array("taskFile", 10),
+  async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const user = await Student.findById(id);
+      const group = await Group.findById(user.group);
+
+      if (!req.files || req.files.length === 0) {
+        req.flash("taskError", "Fayl topilmadi!");
+        return res.redirect(`/student-dashboard/${id}`);
+      }
+
+      const uploadedUrls = [];
+
+      for (const file of req.files) {
+        const fileKey = `homeworks/${Date.now()}-${file.originalname}`;
+
+        // Faylni yuklash
+        const uploadParams = {
+          Bucket: process.env.B2_BUCKET,
+          Key: fileKey,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+        };
+
+        await s3.send(new PutObjectCommand(uploadParams));
+
+        // 1 kunlik presigned URL olish
+        const getCommand = new GetObjectCommand({
+          Bucket: process.env.B2_BUCKET,
+          Key: fileKey,
+        });
+
+        const fileUrl = await getSignedUrl(s3, getCommand, {
+          expiresIn: 24 * 60 * 60,
+        });
+        uploadedUrls.push(fileUrl);
+      }
+
+      const newTask = {
+        image: uploadedUrls,
+        studentId: id,
+        firstName: user.firstName,
+        surName: user.surName,
+        avatar: user.avatar,
+        status: "Pending",
+        date: Date.now(),
       };
 
-      await s3.upload(params).promise();
+      group.tasks.push(newTask);
+      await group.save();
 
-      // Faylga kirish uchun URL (1 kunlik presigned link)
-      const fileUrl = s3.getSignedUrl("getObject", {
-        Bucket: process.env.B2_BUCKET,
-        Key: fileKey,
-        Expires: 24 * 60 * 60, // 1 kun
-      });
-
-      uploadedUrls.push(fileUrl);
+      req.flash("taskSuccess", "Topshiriq muvaffaqiyatli yuborildi!");
+      res.redirect(`/student-dashboard/${id}`);
+    } catch (error) {
+      console.error("Xatolik:", error);
+      req.flash("taskError", "Serverda xatolik yuz berdi!");
+      res.redirect(`/student-dashboard/${id}`);
     }
-
-    const newTask = {
-      image: uploadedUrls,
-      studentId: id,
-      firstName: user.firstName,
-      surName: user.surName,
-      avatar: user.avatar,
-      status: "Pending",
-      date: Date.now(),
-    };
-
-    group.tasks.push(newTask);
-    await group.save();
-
-    req.flash("taskSuccess", "Topshiriq muvaffaqiyatli yuborildi!");
-    res.redirect(`/student-dashboard/${id}`);
-  } catch (error) {
-    console.error("Xatolik:", error);
-    req.flash("taskError", "Serverda xatolik yuz berdi!");
-    res.redirect(`/student-dashboard/${id}`);
   }
-});
+);
 
 export default router;
