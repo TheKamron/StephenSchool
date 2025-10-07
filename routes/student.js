@@ -8,7 +8,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { upload } from '../middleware/upload.js';
 import s3 from "../config/b2.js"
-// import { uploadToImgbb } from '../utils/uploadToImgbb.js';
+import FormData from "form-data";
+import axios from "axios"
+import sharp from "sharp"
 
 const router = Router()
 
@@ -144,7 +146,7 @@ router.get('/exam-results/:id', async (req, res) => {
 // POST
 
 router.post('/student-update/:id', studentMiddleware, async (req, res) => {
-    const {password, newPassword} = req.body
+    const {password, newPassword, avatar} = req.body
     const id = req.userId
     if(!newPassword && !password) {
         req.flash('settingsError', "Barcha qatorlar to'ldirilishi shart!")
@@ -176,6 +178,37 @@ router.post('/student-update/:id', studentMiddleware, async (req, res) => {
     req.flash('success', "Parol Muvaffaqiyatli O'zgartirildi!")
     res.redirect(`/student-settings/${id}`)
 })
+
+router.post("/student-update-avatar/:id", upload.single("avatar"), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const image = req.file;
+
+    if (!image) {
+      return res.status(400).send("Rasm tanlanmadi");
+    }
+
+    // imgbb'ga yuborish
+    const formData = new FormData();
+    formData.append("image", image.buffer.toString("base64"));
+
+    const imgbbRes = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${process.env.API_KEY}`,
+      formData,
+      { headers: formData.getHeaders() }
+    );
+
+    const avatarUrl = imgbbRes.data.data.url;
+
+    // MongoDB’da yangilaymiz
+    await Student.findByIdAndUpdate(id, { avatar: avatarUrl });
+
+    res.redirect(`/student-settings/${id}`);
+  } catch (error) {
+    console.error("Avatar yangilashda xatolik:", error);
+    res.status(500).send("Xatolik yuz berdi");
+  }
+});
 
 router.post('/join/:id', studentMiddleware, async (req, res) => {
     const groupId = req.params.id
@@ -248,6 +281,7 @@ router.post("/send-task/:id", upload.array("taskFile", 10), async (req, res) => 
   } catch (error) {
     console.error("Xatolik:", error);
     req.flash("taskError", "Serverda xatolik yuz berdi!");
+    res.redirect(`/student-dashboard/${id}`);
   }
 });
 

@@ -33,6 +33,7 @@
     <link href="/css/theme.css" rel="stylesheet" media="all">
 
 </head>
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
@@ -74,7 +75,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="">
-                   <h3>StephenSchool</h3>
+                    <h3>StephenSchool</h3>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -152,29 +153,32 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-{{#if adminLoginSuccess}}
-    <div class="success">
-    <svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M10 15.172l-3.95-3.95-1.414 1.414L10 18l9-9-1.414-1.414z"></path>
-    </svg>
-    <span class="success__title">{{adminLoginSuccess}}</span>
-    <svg class="success__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-    </svg>
-    </div>
-    <script>
-     const successElement = document.querySelector('.success');   
-    document.querySelector('.success__close').addEventListener('click', function () {
-    const successElement = document.querySelector('.success');
-    successElement.style.display = 'none';});
-    if (successElement) {
-            // 5 soniyadan keyin elementni yashiramiz
-            setTimeout(() => {
-                successElement.style.display = 'none';
-            }, 10000); // 5000ms = 5 sekund
-        }
-    </script>
-{{/if}}
+            {{#if adminLoginSuccess}}
+            <div class="success">
+                <svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M10 15.172l-3.95-3.95-1.414 1.414L10 18l9-9-1.414-1.414z"></path>
+                </svg>
+                <span class="success__title">{{adminLoginSuccess}}</span>
+                <svg class="success__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </svg>
+            </div>
+            <script>
+                const successElement = document.querySelector('.success');
+                document.querySelector('.success__close').addEventListener('click', function () {
+                    const successElement = document.querySelector('.success');
+                    successElement.style.display = 'none';
+                });
+                if (successElement) {
+                    // 5 soniyadan keyin elementni yashiramiz
+                    setTimeout(() => {
+                        successElement.style.display = 'none';
+                    }, 10000); // 5000ms = 5 sekund
+                }
+            </script>
+            {{/if}}
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -222,7 +226,7 @@
                                                 <h2>{{group.length}}</h2>
                                                 <span>Guruhlar</span>
                                             </div>
-                                        </div>                                      
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -244,76 +248,79 @@
                         </div>
 
                         <div class="row">
-                <div class="col-lg-12">                                
-                <section>
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <!-- USER DATA-->
-                                <div class="user-data m-b-40">
-                                    <h3 class="title-3 m-b-30">
-                                        <i class="zmdi zmdi-account-calendar"></i>Foydalanuvchilar Ro'yxati</h3>
-                                    <div class="filters m-b-45">
-                                    </div>
-                                    <div class="table-responsive table-data">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <td>Ism Familya</td>
-                                                    <td>Telefon Raqam</td>
-                                                    <td>Rol</td>
-                                                    <td>Status</td>
-                                                    <td></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{#if user.length}}
-                                            {{#each user}}
-                                        <tr>                                      
-                                                    <td>
-                                                        <div class="table-data__info">
-                                                            <h6>{{firstName}} {{surName}}</h6>
+                            <div class="col-lg-12">
+                                <section>
+                                    <div class="section__content section__content--p30">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <!-- USER DATA-->
+                                                    <div class="user-data m-b-40">
+                                                        <h3 class="title-3 m-b-30">
+                                                            <i class="zmdi zmdi-account-calendar"></i>Foydalanuvchilar
+                                                            Ro'yxati
+                                                        </h3>
+                                                        <div class="filters m-b-45">
                                                         </div>
-                                                    </td>
-                                                     <td>
-                                                        <div class="table-data__info">
-                                                            <h6>{{phoneNumber}}</h6>
+                                                        <div class="table-responsive table-data">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Ism Familya</td>
+                                                                        <td>Telefon Raqam</td>
+                                                                        <td>Rol</td>
+                                                                        <td>Status</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {{#if user.length}}
+                                                                    {{#each user}}
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="table-data__info">
+                                                                                <h6>{{firstName}} {{surName}}</h6>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="table-data__info">
+                                                                                <h6>{{phoneNumber}}</h6>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{#ifequal role "student"}}
+                                                                            <span class="role student">Student</span>
+                                                                            {{/ifequal }}
+                                                                            {{#ifequal role "teacher"}}
+                                                                            <span class="role teacher">Teacher</span>
+                                                                            {{/ifequal}}
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="role active">Active</span>
+                                                                        </td>
+                                                                        <td>
+
+                                                                            <form action="/delete-user/{{_id}}">
+                                                                                <button><i
+                                                                                        class="fa fa-trash"></i></button>
+                                                                            </form>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    {{/each}}
+                                                                    {{else}}
+                                                                    {{/if}}
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        {{#ifequal role "student"}}
-                                                        <span class="role student">Student</span>
-                                                        {{/ifequal }}
-                                                        {{#ifequal role "teacher"}}
-                                                        <span class="role teacher">Teacher</span>
-                                                        {{/ifequal}}
-                                                    </td>
-                                                    <td>
-                                                        <span class="role active">Active</span>
-                                                    </td>
-                                                    <td>
-                                                        
-                                                           <form action="/delete-user/{{_id}}">
-                                                            <button><i class="fa fa-trash"></i></button>
-                                                           </form> 
-                                                        
-                                                    </td>
-                                                </tr>
-                                            {{/each}}
-                                                {{else}}
-                                                {{/if}}                                                
-                                            </tbody>
-                                        </table>
+                                                    </div>
+                                                    <!-- END USER DATA-->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- END USER DATA-->
+                                </section>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                </section>
-                </div>  
                         </div>
                         <div class="row m-t-30">
                             <div class="col-md-12">
@@ -339,10 +346,10 @@
                                                 <td>{{level}}</td>
                                                 <td class="process">{{status}}</td>
                                                 <td>{{students.length}}</td>
-                                            </tr>  
-                                            {{/each}}                                          
+                                            </tr>
+                                            {{/each}}
                                             {{else}}
-                                            
+
                                             {{/if}}
                                         </tbody>
                                     </table>
@@ -351,51 +358,52 @@
                             </div>
                         </div>
 
-                
+
                         <div class="col-lg-12">
-                                <div class="table-responsive table--no-card m-b-30">
-                                    <h2>Arizalar</h2>
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>Sana</th>
-                                                <th>Telefon Nomer</th>
-                                                <th>Ism, Familya</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{#if contactInfo.length}}
-                                            {{#each contactInfo}}
-                                            <tr>
-                                                <td>{{formatDate_2 createdAt}}</td>
-                                                <td>{{phoneNumber}}</td>
-                                                <td>{{name}} {{surName}}</td>
-                                                <td>
-                                                        
-                                                           <form action="/delete-info/{{_id}}" method="get">
-                                                            <button><i class="fa fa-trash"></i></button>
-                                                           </form> 
-                                                        
-                                                </td>
-                                            </tr>
-                                            {{/each}}
-                                            {{else}}   
-                                            <tr>
-                                                <td>None</td>
-                                                <td>None</td>
-                                                <td>None</td>
-                                            </tr>
-                                            {{/if}}
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="table-responsive table--no-card m-b-30">
+                                <h2>Arizalar</h2>
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <th>Sana</th>
+                                            <th>Telefon Nomer</th>
+                                            <th>Ism, Familya</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#if contactInfo.length}}
+                                        {{#each contactInfo}}
+                                        <tr>
+                                            <td>{{formatDate_2 createdAt}}</td>
+                                            <td>{{phoneNumber}}</td>
+                                            <td>{{name}} {{surName}}</td>
+                                            <td>
+
+                                                <form action="/delete-info/{{_id}}" method="get">
+                                                    <button><i class="fa fa-trash"></i></button>
+                                                </form>
+
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        {{else}}
+                                        <tr>
+                                            <td>None</td>
+                                            <td>None</td>
+                                            <td>None</td>
+                                        </tr>
+                                        {{/if}}
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p><b>StephenSchool</b> Learning Center. Developed by: <a style="color: black;" href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
+                                    <p><b>StephenSchool</b> Learning Center. Developed by: <a style="color: black;"
+                                            href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
                                 </div>
                             </div>
                         </div>
@@ -410,7 +418,7 @@
 
 
 
-                        {{!-- -------------------------------------------------------- --}}
+    {{!-- -------------------------------------------------------- --}}
     <!-- Jquery JS-->
     <script src="/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->

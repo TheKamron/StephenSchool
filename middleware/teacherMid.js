@@ -9,8 +9,7 @@ export default async function (req, res, next) {
     const token = req.cookies.token
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     const user = await Teacher.findById(decoded.userId)
-    console.log(user)
-    
+        
     req.userId = user._id
 
     if(user.role !== 'teacher') {

@@ -4,6 +4,9 @@ import Teacher from "../models/Teacher.js"
 import Group from "../models/Group.js";
 import Student from "../models/Student.js"
 import bcrypt from "bcryptjs"
+import FormData from "form-data";
+import axios from "axios";
+import { upload } from '../middleware/upload.js';
 
 const router = Router()
 
@@ -11,6 +14,7 @@ router.get("/teacher-dashboard/:id", teacherMid, async  (req, res) => {
     const id = req.userId
     const user = await Teacher.findById(id)
     const myGroup = await Group.find({teacherId: id})
+    console.log(myGroup)
     res.render('teacher-dash', {
         layout: "",
         title: "O'qituvchi Paneli | StephenSchool",
@@ -72,6 +76,7 @@ router.get('/create-group', teacherMid, async (req, res) => {
 
 router.get('/my-group/:id', async (req, res) => {
     const id = req.params.id
+    console.log(`group id:`, id)
     const group = await Group.findById(id)
     const userId = group.teacherId
     const user = await Teacher.findById(userId)
@@ -80,7 +85,6 @@ router.get('/my-group/:id', async (req, res) => {
     const tasks = group.tasks.reverse()
     const taskAuthorIds = tasks.map(task => task.studentId)
     const taskAuthor = await Student.find({ _id: {$in: taskAuthorIds } }).populate()
-
     res.render('my-group', {
         title: "Mening Guruhim | O'qituvchi Paneli",
         id,
@@ -88,7 +92,7 @@ router.get('/my-group/:id', async (req, res) => {
         firstName: user.firstName,
         surName: user.surName,
         phoneNumber: user.phoneNumber,
-        avatar: user.avatar,
+        teacherAvatar: user.avatar,
         students,
         taskAuthor,
         tasks,
@@ -172,6 +176,36 @@ router.post('/teacher-update/:id', teacherMid, async (req, res) => {
     res.redirect(`/teacher-settings/${id}`)
 })  
 
+router.post('/teacher-update-avatar/:id',  upload.single("avatar"), teacherMid, async (req, res) => {
+     try {
+        const { id } = req.params;
+        const image = req.file;
+    
+        if (!image) {
+          return res.status(400).send("Rasm tanlanmadi");
+        }
+    
+        // imgbb'ga yuborish
+        const formData = new FormData();
+        formData.append("image", image.buffer.toString("base64"));
+    
+        const imgbbRes = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${process.env.API_KEY}`,
+          formData,
+          { headers: formData.getHeaders() }
+        );
+    
+        const avatarUrl = imgbbRes.data.data.url;
+    
+        // MongoDB’da yangilaymiz
+        await Teacher.findByIdAndUpdate(id, { avatar: avatarUrl });
+    
+        res.redirect(`/teacher-settings/${id}`);
+      } catch (error) {
+        console.error("Avatar yangilashda xatolik:", error);
+        res.status(500).send("Xatolik yuz berdi");
+      }
+})
 
 router.post('/create-group', teacherMid, async (req, res) => {
     const id = req.userId

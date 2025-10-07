@@ -14,10 +14,15 @@ export default {
         if(a === b) {
             return options.fn(this)
         }
-
         return options.inverse(this)
     },
-      toFixed1(value) {
+    ifeq(a, b, c, options) {
+    if (a === b || a === c) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+    },
+    toFixed1(value) {
         return Number(value).toFixed(1)
     }
 }

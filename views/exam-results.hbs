@@ -46,9 +46,15 @@
             </div>
             <div class="menu-sidebar2__content js-scrollbar1">
                 <div class="account2">
+                    {{#ifeq avatar "boy.png" "girl.png"}}
                     <div class="image img-cir img-120">
-                        <img src="/images/{{avatar}}.png" alt="Avatar" />
+                        <img src="images/{{avatar}}" alt="Avatar" />
                     </div>
+                    {{else}}
+                    <div class="image img-cir img-120">
+                        <img src="{{avatar}}" alt="Avatar" />
+                    </div>
+                    {{/ifeq}}
                     <h4 class="name">{{firstName}} {{surName}}</h4>
                     <a style="" href=""><b>{{phoneNumber}}</b></a>
                 </div>
@@ -65,11 +71,11 @@
                         </li>
                         <li class="active">
                             <a href='/my-mock-results'>
-                                <i class="fas fa-trophy"></i>Mock Natijalarim</a>                        
+                                <i class="fas fa-trophy"></i>Mock Natijalarim</a>
                         </li>
                         <li>
                             <a href='/student-settings/{{id}}'>
-                                <i class="fas fa-cog"></i>Sozlamalar</a>                        
+                                <i class="fas fa-cog"></i>Sozlamalar</a>
                         </li>
                     </ul>
                 </nav>
@@ -87,7 +93,7 @@
                         <div class="header-wrap2">
                             <div class="logo d-block d-lg-none">
                             </div>
-                            <div class="header-button2">            
+                            <div class="header-button2">
                                 <div class="header-button-item has-noti js-item-menu">
                                     {{!-- <i class="zmdi zmdi-notifications"></i>
                                     <div class="notifi-dropdown js-dropdown">
@@ -108,7 +114,7 @@
                                         </div>
                                     </div> --}}
                                 </div>
-                                 <div class="header-button-item ">
+                                <div class="header-button-item ">
                                     <a style="color: white" href="/logout"><i class="fas fa-sign-out"></i></a>
                                 </div>
                                 <div class="header-button-item mr-0 js-sidebar-btn">
@@ -119,16 +125,24 @@
                     </div>
                 </div>
             </header>
-            
-             <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
+
+            <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
                 <div class="logo">
-                    <a href=""> <h3>StephenSchool</h3> </a>
+                    <a href="">
+                        <h3>StephenSchool</h3>
+                    </a>
                 </div>
                 <div class="menu-sidebar2__content js-scrollbar2">
                     <div class="account2">
+                        {{#ifeq avatar "boy.png" "girl.png"}}
                         <div class="image img-cir img-120">
-                            <img src="/images/{{avatar}}.png" alt="Avatar" />
+                            <img src="images/{{avatar}}" alt="Avatar" />
                         </div>
+                        {{else}}
+                        <div class="image img-cir img-120">
+                            <img src="{{avatar}}" alt="Avatar" />
+                        </div>
+                        {{/ifeq}}
                         <h4 class="name">{{firstName}} {{surName}}</h4>
                         <a href="">{{phoneNumber}}</a>
                     </div>
@@ -140,222 +154,257 @@
                             <li>
                                 <a href="/student-profile/{{id}}">
                                     <i class="fas fa-user"></i>Profil</a>
-                            </li> 
-                            <li class="active">
-                            <a href='/exam-results'>
-                                <i class="fas fa-trophy"></i>Mock Natijalarim</a>                        
                             </li>
-                             <li>
+                            <li class="active">
+                                <a href='/exam-results'>
+                                    <i class="fas fa-trophy"></i>Mock Natijalarim</a>
+                            </li>
+                            <li>
                                 <a href="/student-settings/{{id}}">
                                     <i class="fas fa-cog"></i>Sozlamalar</a>
-                            </li>  
+                            </li>
                         </ul>
                     </nav>
                 </div>
             </aside>
             <!-- END HEADER DESKTOP-->
-            
-                                                                                                                                                                                                                            <br>
-                                                                                                                                                                                                                            <br>
-                                                                                                                                                                                                                            <br>
-                                                                                                                                                                                                                            <br>
-            
-            <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true"> <div class="modal-dialog modal-sm" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="smallmodalLabel">Feedback</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> <p id="feedback-text"></p> <div class="modal-body"> </div> </div> </div> </div> </div>
 
-           {{!-- Mock Results section --}}
-           {{#if mockResults}}
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="smallmodalLabel">Feedback</h5> <button type="button"
+                                class="close" data-dismiss="modal" aria-label="Close"> <span
+                                    aria-hidden="true">&times;</span> </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="feedback-text"></p>
+                            <div class="modal-body"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Mock Results section --}}
+            {{#if mockResults}}
             <section>
-                   <div class="section__content section__content--p30">
+                <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
                             {{#each mockResults}}
 
-                <div class="card_2">
-                <div class="card-pattern-grid"></div>
-                <div class="card-overlay-dots"></div>
+                            <div class="card_2">
+                                <div class="card-pattern-grid"></div>
+                                <div class="card-overlay-dots"></div>
 
-                <div class="bold-pattern">
-                    <svg viewBox="0 0 100 100">
-                    <path
-                        stroke-dasharray="15 10"
-                        stroke-width="10"
-                        stroke="#000"
-                        fill="none"
-                        d="M0,0 L100,0 L100,100 L0,100 Z"
-                    ></path>
-                    </svg>
-                </div>
+                                <div class="bold-pattern">
+                                    <svg viewBox="0 0 100 100">
+                                        <path stroke-dasharray="15 10" stroke-width="10" stroke="#000" fill="none"
+                                            d="M0,0 L100,0 L100,100 L0,100 Z"></path>
+                                    </svg>
+                                </div>
 
-                <div class="card-title-area">
-                    <span>Mock Result</span>
-                    <span class="card-tag">{{formatDate_3 date}}</span>
-                </div>
+                                <div class="card-title-area">
+                                    <span>Mock Result</span>
+                                    <span class="card-tag">{{formatDate_3 date}}</span>
+                                </div>
 
-                <div class="card-body">
-                    <div class="card-description">
-                        {{!-- <p>{{feedback}}</p> --}}
-                    </div>
+                                <div class="card-body">
+                                    <div class="card-description">
+                                        {{!-- <p>{{feedback}}</p> --}}
+                                    </div>
 
-                    <div class="feature-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="color: white;"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M4 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm11 0a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2z"/><path d="M4 15v-3a8 8 0 0 1 16 0v3"/></g></svg>
+                                    <div class="feature-grid">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    style="color: white;">
+                                                    <g fill="none" stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2">
+                                                        <path
+                                                            d="M4 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm11 0a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2z" />
+                                                        <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="feature-text"> Listening {{toFixed1 listeningScore}} </span>
+                                        </div>
+
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    style="color: white;">
+                                                    <path fill="currentColor"
+                                                        d="M17.75 2.001a2.25 2.25 0 0 1 2.245 2.096L20 4.25v15.498a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25a2.25 2.25 0 0 1-2.245-2.096L4 19.75V4.251a2.25 2.25 0 0 1 2.096-2.245l.154-.005h11.5Zm-5.502 10.996H7.75l-.102.007a.75.75 0 0 0 0 1.487l.102.006h4.498l.102-.006a.75.75 0 0 0 0-1.487l-.102-.007ZM16.25 10h-8.5l-.102.006a.75.75 0 0 0 0 1.487l.102.007h8.5l.102-.007a.75.75 0 0 0 0-1.487L16.25 10Zm0-2.999h-8.5l-.102.007a.75.75 0 0 0 0 1.486l.102.007h8.5l.102-.007a.75.75 0 0 0 0-1.486L16.25 7Z" />
+                                                </svg>
+                                            </div>
+                                            <span class="feature-text">Reading {{toFixed1 readingScore}} </span>
+                                        </div>
+
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    style="color: white;">
+                                                    <path fill="currentColor"
+                                                        d="M15.897 8.834a.75.75 0 0 1 .274 1.025l-3.417 5.913a.75.75 0 1 1-1.299-.75l3.418-5.914a.75.75 0 0 1 1.024-.274" />
+                                                    <path fill="currentColor"
+                                                        d="M14.989 3.785a2.6 2.6 0 0 1 1.915-.513c.295.04.562.143.828.272c.254.125.55.296.904.5l.043.025c.353.203.65.375.885.533c.245.164.469.343.65.58c.419.545.604 1.233.514 1.914a2.7 2.7 0 0 1-.273.828c-.124.254-.296.55-.5.903l-5.126 8.87a3.44 3.44 0 0 1-1.407 1.383l-1.861 1.032c-.33.183-.62.344-.866.452a2.2 2.2 0 0 1-.521.166a1 1 0 0 1-.174.02H4a.75.75 0 0 1 0-1.5h4.336l-.006-.05a12 12 0 0 1-.04-.975l-.036-2.127a3.43 3.43 0 0 1 .494-1.909l5.127-8.87c.203-.353.375-.65.533-.885c.165-.245.344-.468.58-.65m1.719.974a1.1 1.1 0 0 0-.807.216c-.053.041-.127.115-.249.297a13 13 0 0 0-.407.673l.022.008c.384.15.958.416 1.78.89c.811.468 1.319.872 1.636 1.187c.198-.342.332-.576.425-.766c.096-.197.124-.297.133-.364a1.1 1.1 0 0 0-.216-.804c-.041-.054-.115-.127-.297-.25a16 16 0 0 0-.82-.49c-.38-.22-.633-.365-.836-.464c-.197-.096-.297-.124-.364-.133m1.099 4.528l.003.008l.007.014l.008.016l-.002-.003l-.018-.04zm-.002-.005l-.001-.004v.002m.013.033a1.5 1.5 0 0 0-.168-.196c-.2-.203-.6-.54-1.352-.975c-.772-.445-1.278-.675-1.576-.792a4 4 0 0 0-.239-.085l-4.435 7.675a1.95 1.95 0 0 0-.294 1.132l.033 1.948c.49.07.924.319 1.232.678l1.677-.93a1.95 1.95 0 0 0 .835-.82l4.35-7.527a1 1 0 0 1-.057-.099z" />
+                                                </svg>
+                                            </div>
+                                            <span class="feature-text">Writing {{toFixed1 writingScore}} </span>
+                                        </div>
+
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    style="color: white;">
+                                                    <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                                        <rect width="6" height="12" x="9" y="2" fill="currentColor"
+                                                            rx="3" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M5 3v2M1 2v4m18-3v2m4-3v4M5 10v1a7 7 0 0 0 7 7v0a7 7 0 0 0 7-7v-1m-7 8v4m0 0H9m3 0h3" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="feature-text">Speaking {{toFixed1 speakingScore}} </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-actions">
+                                        <div class="overall">
+                                            <span class="overall-score"></span> {{toFixed1 overall}}
+                                            <span class="overall-title">Overall </span>
+                                        </div>
+
+                                        <button class="card-button" data-toggle="modal" data-target="#feedbackModal"
+                                            data-feedback="{{feedback}}">
+                                            Feedback
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="dots-pattern">
+                                    <svg viewBox="0 0 80 40">
+                                        <circle fill="#000" r="3" cy="10" cx="10"></circle>
+                                        <circle fill="#000" r="3" cy="10" cx="30"></circle>
+                                        <circle fill="#000" r="3" cy="10" cx="50"></circle>
+                                        <circle fill="#000" r="3" cy="10" cx="70"></circle>
+                                        <circle fill="#000" r="3" cy="20" cx="20"></circle>
+                                        <circle fill="#000" r="3" cy="20" cx="40"></circle>
+                                        <circle fill="#000" r="3" cy="20" cx="60"></circle>
+                                        <circle fill="#000" r="3" cy="30" cx="10"></circle>
+                                        <circle fill="#000" r="3" cy="30" cx="30"></circle>
+                                        <circle fill="#000" r="3" cy="30" cx="50"></circle>
+                                        <circle fill="#000" r="3" cy="30" cx="70"></circle>
+                                    </svg>
+                                </div>
+
+                                <div class="accent-shape"></div>
+                                <div class="corner-slice"></div>
+
+                                <div class="stamp">
+                                    <span class="stamp-text">StephenSchool</span>
+                                </div>
+                            </div>
+
+                            {{/each}}
                         </div>
-                        <span class="feature-text"> Listening {{toFixed1 listeningScore}} </span>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon">
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="color: white;"><path fill="currentColor" d="M17.75 2.001a2.25 2.25 0 0 1 2.245 2.096L20 4.25v15.498a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25a2.25 2.25 0 0 1-2.245-2.096L4 19.75V4.251a2.25 2.25 0 0 1 2.096-2.245l.154-.005h11.5Zm-5.502 10.996H7.75l-.102.007a.75.75 0 0 0 0 1.487l.102.006h4.498l.102-.006a.75.75 0 0 0 0-1.487l-.102-.007ZM16.25 10h-8.5l-.102.006a.75.75 0 0 0 0 1.487l.102.007h8.5l.102-.007a.75.75 0 0 0 0-1.487L16.25 10Zm0-2.999h-8.5l-.102.007a.75.75 0 0 0 0 1.486l.102.007h8.5l.102-.007a.75.75 0 0 0 0-1.486L16.25 7Z"/></svg> 
-                </div>
-                        <span class="feature-text">Reading {{toFixed1 readingScore}} </span>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="color: white;"><path fill="currentColor" d="M15.897 8.834a.75.75 0 0 1 .274 1.025l-3.417 5.913a.75.75 0 1 1-1.299-.75l3.418-5.914a.75.75 0 0 1 1.024-.274"/><path fill="currentColor" d="M14.989 3.785a2.6 2.6 0 0 1 1.915-.513c.295.04.562.143.828.272c.254.125.55.296.904.5l.043.025c.353.203.65.375.885.533c.245.164.469.343.65.58c.419.545.604 1.233.514 1.914a2.7 2.7 0 0 1-.273.828c-.124.254-.296.55-.5.903l-5.126 8.87a3.44 3.44 0 0 1-1.407 1.383l-1.861 1.032c-.33.183-.62.344-.866.452a2.2 2.2 0 0 1-.521.166a1 1 0 0 1-.174.02H4a.75.75 0 0 1 0-1.5h4.336l-.006-.05a12 12 0 0 1-.04-.975l-.036-2.127a3.43 3.43 0 0 1 .494-1.909l5.127-8.87c.203-.353.375-.65.533-.885c.165-.245.344-.468.58-.65m1.719.974a1.1 1.1 0 0 0-.807.216c-.053.041-.127.115-.249.297a13 13 0 0 0-.407.673l.022.008c.384.15.958.416 1.78.89c.811.468 1.319.872 1.636 1.187c.198-.342.332-.576.425-.766c.096-.197.124-.297.133-.364a1.1 1.1 0 0 0-.216-.804c-.041-.054-.115-.127-.297-.25a16 16 0 0 0-.82-.49c-.38-.22-.633-.365-.836-.464c-.197-.096-.297-.124-.364-.133m1.099 4.528l.003.008l.007.014l.008.016l-.002-.003l-.018-.04zm-.002-.005l-.001-.004v.002m.013.033a1.5 1.5 0 0 0-.168-.196c-.2-.203-.6-.54-1.352-.975c-.772-.445-1.278-.675-1.576-.792a4 4 0 0 0-.239-.085l-4.435 7.675a1.95 1.95 0 0 0-.294 1.132l.033 1.948c.49.07.924.319 1.232.678l1.677-.93a1.95 1.95 0 0 0 .835-.82l4.35-7.527a1 1 0 0 1-.057-.099z"/></svg>
-                        </div>
-                        <span class="feature-text">Writing {{toFixed1 writingScore}} </span>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="color: white;"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect width="6" height="12" x="9" y="2" fill="currentColor" rx="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v2M1 2v4m18-3v2m4-3v4M5 10v1a7 7 0 0 0 7 7v0a7 7 0 0 0 7-7v-1m-7 8v4m0 0H9m3 0h3"/></g></svg>
-                        </div>
-                        <span class="feature-text">Speaking {{toFixed1 speakingScore}} </span>
-                    </div>
-                    </div>
-
-                    <div class="card-actions">
-                    <div class="overall">
-                        <span class="overall-score"></span> {{toFixed1 overall}}
-                        <span class="overall-title">Overall </span>
-                    </div>
-
-                    <button 
-                    class="card-button"
-                    data-toggle="modal"
-                    data-target="#feedbackModal"
-                    data-feedback="{{feedback}}">
-                        Feedback
-                    </button>
-                    </div>
-                </div>
-
-                <div class="dots-pattern">
-                    <svg viewBox="0 0 80 40">
-                    <circle fill="#000" r="3" cy="10" cx="10"></circle>
-                    <circle fill="#000" r="3" cy="10" cx="30"></circle>
-                    <circle fill="#000" r="3" cy="10" cx="50"></circle>
-                    <circle fill="#000" r="3" cy="10" cx="70"></circle>
-                    <circle fill="#000" r="3" cy="20" cx="20"></circle>
-                    <circle fill="#000" r="3" cy="20" cx="40"></circle>
-                    <circle fill="#000" r="3" cy="20" cx="60"></circle>
-                    <circle fill="#000" r="3" cy="30" cx="10"></circle>
-                    <circle fill="#000" r="3" cy="30" cx="30"></circle>
-                    <circle fill="#000" r="3" cy="30" cx="50"></circle>
-                    <circle fill="#000" r="3" cy="30" cx="70"></circle>
-                    </svg>
-                </div>
-
-                <div class="accent-shape"></div>
-                <div class="corner-slice"></div>
-
-                <div class="stamp">
-                    <span class="stamp-text">StephenSchool</span>
-                </div>
-                </div>
-
-                                            {{/each}}
-            </div>
             </section>
-           {{else}}
+            {{else}}
             <!-- Agar mock natija bo‘lmasa -->
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="section__content section__content--p30">              
-                <div class="info-card">
-                    <div class="card-wrapper">
-                        <div class="card-icon">
-                            <div class="icon-cart-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 432 432" fill="#ffff">
-                                    <path d="M213.5 3q88.5 0 151 62.5T427 216t-62.5 150.5t-151 62.5t-151-62.5T0 216T62.5 65.5T213.5 3zM235 323V195h-43v128h43zm0-171v-43h-43v43h43z"/>
-                                </svg>    
-                            </div>
-                        </div>
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="section__content section__content--p30">
+                            <div class="info-card">
+                                <div class="card-wrapper">
+                                    <div class="card-icon">
+                                        <div class="icon-cart-box">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 432 432" fill="#ffff">
+                                                <path
+                                                    d="M213.5 3q88.5 0 151 62.5T427 216t-62.5 150.5t-151 62.5t-151-62.5T0 216T62.5 65.5T213.5 3zM235 323V195h-43v128h43zm0-171v-43h-43v43h43z" />
+                                            </svg>
+                                        </div>
+                                    </div>
 
-                        <div class="card-content">
-                            <div class="card-title-wrapper">
-                                <span class="card-title">Diqqat!</span>
-                            </div>
-                            <div class="card-text">
-                                Afsuski, hozirda sizda hech qanday Mock Natijalari mavjud emas!
+                                    <div class="card-content">
+                                        <div class="card-title-wrapper">
+                                            <span class="card-title">Diqqat!</span>
+                                        </div>
+                                        <div class="card-text">
+                                            Afsuski, hozirda sizda hech qanday Mock Natijalari mavjud emas!
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
 
-           {{/if}}
+            {{/if}}
 
-        <footer class="footer-section">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 text-center py-3">
-        <div class="copyright">
-          <p>
-            <b>StephenSchool Learning Center.</b> 
-            <b style="text-decoration: underline;">v1.1.3</b>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+            <footer class="footer-section">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 text-center py-3">
+                            <div class="copyright">
+                                <p>
+                                    <b>StephenSchool Learning Center.</b>
+                                    <b style="text-decoration: underline;">v1.1.5</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
-      
-        
-    <!-- Jquery JS-->
-    <script src="/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="/bootstrap-4.1/popper.min.js"></script>
-    <script src="/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="/slick/slick.min.js">
-    </script>
-    <script src="/wow/wow.min.js"></script>
-    <script src="/animsition/animsition.min.js"></script>
-    <script src="/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="/circle-progress/circle-progress.min.js"></script>
-    <script src="/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/select2/select2.min.js">
-    </script>
 
-    <!-- Main JS-->
-    <script src="/js/main.js"></script>
-    
-    {{!-- dynamic data rendering --}}
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Barcha .card-button tugmalarini topamiz
-    const buttons = document.querySelectorAll('.card-button');
 
-    buttons.forEach(function(button) {
-        button.addEventListener('click', function () {
-        const feedback = this.getAttribute('data-feedback') || "Hech qanday feedback mavjud emas";
-        document.getElementById('feedback-text').textContent = feedback;
-        });
-    });
-    });
-    </script>
+            <!-- Jquery JS-->
+            <script src="/jquery-3.2.1.min.js"></script>
+            <!-- Bootstrap JS-->
+            <script src="/bootstrap-4.1/popper.min.js"></script>
+            <script src="/bootstrap-4.1/bootstrap.min.js"></script>
+            <!-- Vendor JS       -->
+            <script src="/slick/slick.min.js">
+            </script>
+            <script src="/wow/wow.min.js"></script>
+            <script src="/animsition/animsition.min.js"></script>
+            <script src="/bootstrap-progressbar/bootstrap-progressbar.min.js">
+            </script>
+            <script src="/counter-up/jquery.waypoints.min.js"></script>
+            <script src="/counter-up/jquery.counterup.min.js">
+            </script>
+            <script src="/circle-progress/circle-progress.min.js"></script>
+            <script src="/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="/select2/select2.min.js">
+            </script>
+
+            <!-- Main JS-->
+            <script src="/js/main.js"></script>
+
+            {{!-- dynamic data rendering --}}
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Barcha .card-button tugmalarini topamiz
+                    const buttons = document.querySelectorAll('.card-button');
+
+                    buttons.forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            const feedback = this.getAttribute('data-feedback') || "Hech qanday feedback mavjud emas";
+                            document.getElementById('feedback-text').textContent = feedback;
+                        });
+                    });
+                });
+            </script>
 
 </body>

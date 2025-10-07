@@ -1,72 +1,81 @@
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <title>{{title}}</title>
+  <title>{{title}}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="/css/fontawesome.css">
-    <link rel="stylesheet" href="/css/stephen.css">
-    <link rel="stylesheet" href="/css/owl.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-  </head>
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="/css/fontawesome.css">
+  <link rel="stylesheet" href="/css/stephen.css">
+  <link rel="stylesheet" href="/css/owl.css">
+  <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+</head>
 
-      <div class="login-container">
-        <form action="/admin-login" method="post">
-        <div class="login-card">
-            <a class="login">Admin Panel</a>
-            <div class="inputBox">
-                <input type="text" name="userName" required="required">
-                <span class="number">Username</span>
-            </div>
-            <div class="inputBox">
-                <input type="password"  name="password" required="required" style="color: black;">
-                <span>Parol</span>
-            </div>
-            <button class="enter">Kirish</button>
-          </div>
-
-{{#if adminLoginError}}                            
-    <div class="error">
-    <div class="error__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"><path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path></svg>
+<div class="login-container">
+  <form action="/admin-login" method="post">
+    <div class="login-card">
+      <a class="login">Admin Panel</a>
+      <div class="inputBox">
+        <input type="text" name="userName" required="required">
+        <span class="number">Username</span>
+      </div>
+      <div class="inputBox">
+        <input type="password" name="password" required="required" style="color: black;">
+        <span>Parol</span>
+      </div>
+      <button class="enter">Kirish</button>
     </div>
-    <div class="error__title">{{adminLoginError}}</div>
-    <div class="error__close"><svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20"><path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path></svg></div>
+
+    {{#if adminLoginError}}
+    <div class="error">
+      <div class="error__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+          <path fill="#393a37"
+            d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z">
+          </path>
+        </svg>
+      </div>
+      <div class="error__title">{{adminLoginError}}</div>
+      <div class="error__close"><svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+          <path fill="#393a37"
+            d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z">
+          </path>
+        </svg></div>
     </div>
     <script>
-     const errorElement = document.querySelector('.error');   
-    document.querySelector('.error__close').addEventListener('click', function () {
-    const errorElement = document.querySelector('.error');
-    errorElement.style.display = 'none';});
-    if (errorElement) {
-            // 5 soniyadan keyin elementni yashiramiz
-            setTimeout(() => {
-                errorElement.style.display = 'none';
-            }, 7000); // 5000ms = 5 sekund
-        }
+      const errorElement = document.querySelector('.error');
+      document.querySelector('.error__close').addEventListener('click', function () {
+        const errorElement = document.querySelector('.error');
+        errorElement.style.display = 'none';
+      });
+      if (errorElement) {
+        // 5 soniyadan keyin elementni yashiramiz
+        setTimeout(() => {
+          errorElement.style.display = 'none';
+        }, 7000); // 5000ms = 5 sekund
+      }
     </script>
-{{/if}}
+    {{/if}}
 
     <div class="footer">
       <p><b>StephenSchool Learning Center.</b> Developed by: <a href="https://t.me/offcodev"><b>offcodev</b></a></p>
     </div>
-    </div>
-  
+</div>
 
-    <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="/jquery/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/isotope.min.js"></script>
-  <script src="/js/owl-carousel.js"></script>
-  <script src="/js/counter.js"></script>
-  <script src="/js/custom.js"></script>
 
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>

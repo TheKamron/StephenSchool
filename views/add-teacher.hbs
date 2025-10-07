@@ -5,9 +5,9 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        
-                            <h3>StephenSchool</h3>
-                        
+
+                        <h3>StephenSchool</h3>
+
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-           <nav class="navbar-mobile">
+            <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="active">
@@ -40,11 +40,11 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                
-                   <h3>StephenSchool</h3>
-                
+
+                <h3>StephenSchool</h3>
+
             </div>
-               <div class="menu-sidebar__content js-scrollbar1">
+            <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="has-sub">
@@ -74,7 +74,7 @@
                         <div class="header-wrap">
                             <div class="header-button">
                                 <div class="noti-wrap"></div>
-                              <div class="account-wrap">
+                                <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             <img src="/images/admin-avatar.png" alt="{{adminInfo.userName}}" />
@@ -119,36 +119,39 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-{{#if addTeacherSuccess}}
-    <div class="success">
-    <svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M10 15.172l-3.95-3.95-1.414 1.414L10 18l9-9-1.414-1.414z"></path>
-    </svg>
-    <span class="success__title">{{addTeacherSuccess}}</span>
-    <svg class="success__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-    </svg>
-    </div>
-    <script>
-     const successElement = document.querySelector('.success');   
-    document.querySelector('.success__close').addEventListener('click', function () {
-    const successElement = document.querySelector('.success');
-    successElement.style.display = 'none';});
-    if (successElement) {
-            // 5 soniyadan keyin elementni yashiramiz
-            setTimeout(() => {
-                successElement.style.display = 'none';
-            }, 10000); // 5000ms = 5 sekund
-        }
-    </script>
-{{/if}}
+            {{#if addTeacherSuccess}}
+            <div class="success">
+                <svg class="success__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M10 15.172l-3.95-3.95-1.414 1.414L10 18l9-9-1.414-1.414z"></path>
+                </svg>
+                <span class="success__title">{{addTeacherSuccess}}</span>
+                <svg class="success__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </svg>
+            </div>
+            <script>
+                const successElement = document.querySelector('.success');
+                document.querySelector('.success__close').addEventListener('click', function () {
+                    const successElement = document.querySelector('.success');
+                    successElement.style.display = 'none';
+                });
+                if (successElement) {
+                    // 5 soniyadan keyin elementni yashiramiz
+                    setTimeout(() => {
+                        successElement.style.display = 'none';
+                    }, 10000); // 5000ms = 5 sekund
+                }
+            </script>
+            {{/if}}
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="content-wrapper">
-                        <div class="col-lg-6">
-                            <div class="card">
+                            <div class="col-lg-6">
+                                <div class="card">
                                     <div class="card-header">
                                         <strong>Yangi</strong> O'qituvchi Qo'shish
                                     </div>
@@ -156,64 +159,67 @@
                                         <form action="/add-teacher" method="post">
                                             <div class="form-group">
                                                 <label for="nf-name" class=" form-control-label">Ism</label>
-                                                <input type="text" id="nf-name" name="firstName" class="form-control">    
+                                                <input type="text" id="nf-name" name="firstName" class="form-control">
                                             </div>
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label for="nf-surname" class=" form-control-label">Familya</label>
-                                                <input type="text" id="nf-surname" name="surName" class="form-control">    
+                                                <input type="text" id="nf-surname" name="surName" class="form-control">
                                             </div>
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label for="nf-number" class=" form-control-label">Telefon Nomer</label>
-                                                <input type="text" id="nf-number" name="phoneNumber" value="+998" class="form-control">    
+                                                <input type="text" id="nf-number" name="phoneNumber" value="+998"
+                                                    class="form-control">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="birthDate" class=" form-control-label">Tug'ilgan Kun</label>
                                                 <input type="date" id="birthDate" name="birthDate" class="form-control">
-                                            </div>                    
+                                            </div>
 
                                             <div class="form-group">
                                                 <label for="nf-password" class=" form-control-label">Parol</label>
-                                                <input type="text" id="nf-password" name="password" class="form-control">
+                                                <input type="text" id="nf-password" name="password"
+                                                    class="form-control">
                                             </div>
 
-       {{!-- <br> --}}
+                                            {{!-- <br> --}}
 
                                             <div class="col col-md-6">
-                                             <input type="text" name="role" value="teacher" hidden>
+                                                <input type="text" name="role" value="teacher" hidden>
 
-                                             <label for="sub" class=" form-control-label">Fanni Tanlang:</label>
-                                            <select name="subject" id="subject" class="form-control">
-                                                <option value="english">Ingliz Tili</option>
-                                                <option value="russian">Rus Tili</option>
-                                                <option value="korean">Koreys Tili</option>
-                                            </select>
+                                                <label for="sub" class=" form-control-label">Fanni Tanlang:</label>
+                                                <select name="subject" id="subject" class="form-control">
+                                                    <option value="english">Ingliz Tili</option>
+                                                    <option value="russian">Rus Tili</option>
+                                                    <option value="korean">Koreys Tili</option>
+                                                </select>
 
-                            <br>
+                                                <br>
 
-                                            <label for="gender" class=" form-control-label">Jinsi</label>
-                                            <select name="gender" id="gender" class="form-control">
-                                                <option value="male">Erkak</option>
-                                                <option value="female">Ayol</option>
-                                            </select>
-                                         <br>
-                                         <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-plus"></i> Qo'shish
-                                        </button>
+                                                <label for="gender" class=" form-control-label">Jinsi</label>
+                                                <select name="gender" id="gender" class="form-control">
+                                                    <option value="male">Erkak</option>
+                                                    <option value="female">Ayol</option>
+                                                </select>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-plus"></i> Qo'shish
+                                                </button>
                                         </form>
                                     </div>
-                                   
+
                                 </div>
-                        </div>
-                         
-                       <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p><b>StephenSchool</b> Learning Center. Developed by: <a style="color: black;" href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright">
+                                        <p><b>StephenSchool</b> Learning Center. Developed by: <a style="color: black;"
+                                                href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

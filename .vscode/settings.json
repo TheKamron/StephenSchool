@@ -1,0 +1,18 @@
+{
+  // Hamma fayllar uchun formatlashni yoqish
+  "editor.formatOnSave": true,
+
+  // Har turdagi fayl uchun default formatter
+  "[handlebars]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Prettier’ni butunlay majburlamaslik uchun
+  "prettier.disableLanguages": ["html", "handlebars"]
+}

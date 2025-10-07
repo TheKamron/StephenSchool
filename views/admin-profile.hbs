@@ -33,6 +33,7 @@
     <link href="/css/theme.css" rel="stylesheet" media="all">
 
 </head>
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
@@ -74,7 +75,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="">
-                   <h3>StephenSchool</h3>
+                    <h3>StephenSchool</h3>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -158,44 +159,56 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <section>
-                        <div class="container-fluid">
-                        <div class="content-wrapper">
-                        <div class="col-lg-6">
-                            <div class="card">
-                                    <div class="card-header">
-                                        <strong> <i class="fa fa-user"></i> Mening Profilim</strong>   
-                                    </div>
-                                    <div class="card-body card-block">
-                                    <div class="profile-picture-wrapper">
-                                <img src="/images/admin-avatar.png" alt="User Profile Picture" class="profile-picture">
-                                    </div>    
-                                            <div class="form-group">
-                                                <label for="userName" class=" form-control-label"> <i class="fa fa-id-card"></i> Login</label>
-                                                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="{{adminInfo.userName}}" class="form-control" disabled>    
+                            <div class="container-fluid">
+                                <div class="content-wrapper">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <strong> <i class="fa fa-user"></i> Mening Profilim</strong>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="phoneNumber" class=" form-control-label"><i class="fa fa-phone"></i> Telefon Raqam</label>
-                                                <input type="text" id="phoneNumber" name="phoneNumber" value="{{adminInfo.phoneNumber}}" class="form-control" disabled>    
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label for="registeredAt" class=" form-control-label"><i class="fa fa-clock"></i> Ro'yxatdan O'tilgan Sana</label>
-                                                <input type="text" id="registeredAt" name="registeredAt" value="{{formatDate_2 adminInfo.createdAt}}" class="form-control" disabled>    
+                                            <div class="card-body card-block">
+                                                <div class="profile-picture-wrapper">
+                                                    <img src="/images/admin-avatar.png" alt="User Profile Picture"
+                                                        class="profile-picture">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="userName" class=" form-control-label"> <i
+                                                            class="fa fa-id-card"></i> Login</label>
+                                                    <input type="text" id="phoneNumber" name="phoneNumber"
+                                                        placeholder="{{adminInfo.userName}}" class="form-control"
+                                                        disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phoneNumber" class=" form-control-label"><i
+                                                            class="fa fa-phone"></i> Telefon Raqam</label>
+                                                    <input type="text" id="phoneNumber" name="phoneNumber"
+                                                        value="{{adminInfo.phoneNumber}}" class="form-control" disabled>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="registeredAt" class=" form-control-label"><i
+                                                            class="fa fa-clock"></i> Ro'yxatdan O'tilgan Sana</label>
+                                                    <input type="text" id="registeredAt" name="registeredAt"
+                                                        value="{{formatDate_2 adminInfo.createdAt}}"
+                                                        class="form-control" disabled>
+                                                </div>
+
+                                                <button class="btn btn-warning btn-sm"><a style="color: black;"
+                                                        href="/admin-settings/{{id}}"><i class="fa fa-pen"></i>
+                                                        Sozlamalar</a></button>
                                             </div>
 
-                                            <button class="btn btn-warning btn-sm"><a style="color: black;" href="/admin-settings/{{id}}"><i class="fa fa-pen"></i> Sozlamalar</a></button>
+                                        </div>
                                     </div>
-                                   
+                                </div>
                             </div>
-                        </div>
-                            </div>
-                            </div>
-                    </section>
+                        </section>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p><b>StephenSchool</b> Learning Center. Developed by: <a style="color: black;" href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
+                                    <p><b>StephenSchool</b> Learning Center. Developed by: <a style="color: black;"
+                                            href="https://t.me/offcodev"><b>offcodev</b></a>.</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +223,7 @@
 
 
 
-                        {{!-- -------------------------------------------------------- --}}
+    {{!-- -------------------------------------------------------- --}}
     <!-- Jquery JS-->
     <script src="/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
