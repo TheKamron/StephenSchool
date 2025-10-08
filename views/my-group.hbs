@@ -84,9 +84,9 @@
                         {{!-- Profile --}}
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">
-                                {{#ifeq avatar "boy.png" "girl.png"}}
+                                {{#ifeq teacherAvatar "male.jpg" "female.jpg"}}
                                 <div class="image img-cir img-120">
-                                    <img src="images/{{teacherAvatar}}" alt="Avatar" />
+                                    <img src="/images/{{teacherAvatar}}" alt="Avatar" />
                                 </div>
                                 {{else}}
                                 <div class="image img-cir img-120">
@@ -98,9 +98,9 @@
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
-                                        {{#ifeq avatar "boy.png" "girl.png"}}
+                                        {{#ifeq teacherAvatar "male.jpg" "female.jpg"}}
                                         <div class="image img-cir img-120">
-                                            <img src="images/{{teacherAvatar}}" alt="Avatar" />
+                                            <img src="/images/{{teacherAvatar}}" alt="Avatar" />
                                         </div>
                                         {{else}}
                                         <div class="image img-cir img-120">
@@ -461,12 +461,35 @@
                                                 <div class="au-message__item unread">
                                                     <div class="au-message__item-inner">
                                                         <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
+                                                            {{#ifequal status "Pending"}}
+                                                            {{#ifeq avatar "boy.png" "girl.png"}}
+                                                            <div class="avatar-wrap online">
                                                                 <div class="avatar">
-                                                                    <img src="/images/tasks.jpg" alt="Avatar">
+                                                                    <img src="/images/{{avatar}}" alt="Avatar">
                                                                 </div>
                                                             </div>
-
+                                                            {{else}}
+                                                            <div class="avatar-wrap online">
+                                                                <div class="avatar">
+                                                                    <img src="{{avatar}}" alt="Avatar">
+                                                                </div>
+                                                            </div>
+                                                            {{/ifeq}}
+                                                            {{else}}
+                                                            {{#ifeq avatar "boy.png" "girl.png"}}
+                                                            <div class="avatar-wrap">
+                                                                <div class="avatar">
+                                                                    <img src="/images/{{avatar}}" alt="Avatar">
+                                                                </div>
+                                                            </div>
+                                                            {{else}}
+                                                            <div class="avatar-wrap">
+                                                                <div class="avatar">
+                                                                    <img src="{{avatar}}" alt="Avatar">
+                                                                </div>
+                                                            </div>
+                                                            {{/ifeq}}
+                                                            {{/ifequal}}
                                                             <div class="text">
                                                                 <h5 class="name">{{firstName}} {{surName}}</h5>
                                                                 <form action="/task-checked/{{this.id}}" method="post">

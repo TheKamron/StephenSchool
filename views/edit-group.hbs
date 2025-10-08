@@ -84,7 +84,7 @@
             {{! Profile Settings }}
             <div class="account-wrap">
               <div class="account-item account-item--style2 clearfix js-item-menu">
-                {{#ifeq avatar "male.jpg" "female.jpg"}}
+                {{#ifeq avatar "male" "female"}}
                 <div class="image">
                   <img src="/images/{{avatar}}.jpg" alt="Avatar" />
                 </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="account-dropdown js-dropdown">
                   <div class="info clearfix">
-                    {{#ifeq avatar "male.jpg" "female.jpg"}}
+                    {{#ifeq avatar "male" "female"}}
                     <div class="image">
                       <img src="/images/{{avatar}}.jpg" alt="Avatar" />
                     </div>

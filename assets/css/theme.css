@@ -253,7 +253,7 @@ section {
     background: #e5e5e5;
     padding-left: 300px;
 }
-
+    
 @media (max-width: 991px) {
     .page-container {
         position: relative;

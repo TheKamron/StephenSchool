@@ -50,7 +50,7 @@
               <div class="account-item account-item--style2 clearfix js-item-menu">
                 {{#ifeq avatar "male.jpg" "female.jpg"}}
                 <div class="image">
-                  <img src="/images/{{avatar}}.jpg" alt="Avatar" />
+                  <img src="/images/{{avatar}}" alt="Avatar" />
                 </div>
                 {{else}}
                 <div class="image">
@@ -64,7 +64,7 @@
                   <div class="info clearfix">
                     {{#ifeq avatar "male.jpg" "female.jpg"}}
                     <div class="image">
-                      <img src="/images/{{avatar}}.jpg" alt="Avatar" />
+                      <img src="/images/{{avatar}}" alt="Avatar" />
                     </div>
                     {{else}}
                     <div class="image">
@@ -157,8 +157,7 @@
                               <div class="card-body card-block">
                                 <div class="profile-picture-wrapper">
                                   {{#ifeq avatar "male.jpg" "female.jpg"}}
-                                  <img src="/images/{{avatar}}.jpg" alt="User Profile Picture"
-                                    class="profile-picture" />
+                                  <img src="/images/{{avatar}}" alt="User Profile Picture" class="profile-picture" />
                                   {{else}}
                                   <img src="{{avatar}}" alt="User Profile Picture" class="profile-picture" />
                                   {{/ifeq}}
