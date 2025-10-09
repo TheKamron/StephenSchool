@@ -84,9 +84,9 @@
             {{! Profile Settings }}
             <div class="account-wrap">
               <div class="account-item account-item--style2 clearfix js-item-menu">
-                {{#ifeq avatar "male" "female"}}
+                {{#ifeq avatar "male.jpg" "female.jpg"}}
                 <div class="image">
-                  <img src="/images/{{avatar}}.jpg" alt="Avatar" />
+                  <img src="/images/{{avatar}}" alt="Avatar" />
                 </div>
                 {{else}}
                 <div class="image">
@@ -98,9 +98,9 @@
                 </div>
                 <div class="account-dropdown js-dropdown">
                   <div class="info clearfix">
-                    {{#ifeq avatar "male" "female"}}
+                    {{#ifeq avatar "male.jpg" "female.jpg"}}
                     <div class="image">
-                      <img src="/images/{{avatar}}.jpg" alt="Avatar" />
+                      <img src="/images/{{avatar}}" alt="Avatar" />
                     </div>
                     {{else}}
                     <div class="image">
@@ -238,8 +238,7 @@
                                   </select>
                                   <br />
                                   <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-plus"></i>
-                                    Saqlash
+                                    Saqlash <i class="fa fa-check"></i>
                                   </button>
                                 </form>
                                 <br />
@@ -247,8 +246,7 @@
                                   <label for="deleteGroup" class="form-control-label">Guruhni O'chirish!</label>
                                   <form action="/delete-group/{{id}}">
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                      <i class="fa fa-trash"></i>
-                                      O'chirish
+                                      O'chirish <i class="fa fa-trash"></i>
                                     </button>
                                   </form>
                                 </div>
